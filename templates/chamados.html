@@ -1,0 +1,78 @@
+{% extends "template.html" %}
+{%block titulo%}
+Chamados TI
+{%endblock%}
+{% block cadastro %}
+<a class="nav-link" href="{{url_for('pagina_cadastro_chamado')}}">Cadastro</a>
+{% endblock %}
+{% block conteudo%}
+
+<h2 style="text-align: center; font-size: 25px; font-family: Segoe UI;">Tabela de Chamados</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>Usuario</th>
+      <th>Equipamento</th>
+      <th>Descrição</th>
+      <th>Setor</th>
+      <th>Data Abertura</th>
+      <th>Técnico</th>
+      <th>Observação</th>
+      <th>Data Fechamento</th>
+      <th>Solução</th>
+      <th>Ações</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for chamado in chamados %}
+    <tr>
+      <td>{{ chamado[1] }}</td>
+      <td>{{ chamado[2] }}</td>
+      <td>{{ chamado[3] }}</td>
+      <td>{{ chamado[4] }}</td>
+      <td>{{ chamado[5] }}</td>
+      {% if chamado[6] == None %}
+      <td>{{""}}</td>
+      {%else %}
+      <td>{{ chamado[6] }}</td>
+      {% endif %}
+      {% if chamado[7] == None %}
+      <td>{{""}}</td>
+      {%else %}
+      <td>{{ chamado[7] }}</td>
+      {% endif %}
+      {% if chamado[8] == None %}
+      <td>{{""}}</td>
+      {%else %}
+      <td>{{ chamado[8] }}</td>
+      {% endif %}
+      {% if chamado[9] == None %}
+      <td>{{""}}</td>
+      {%else %}
+      <td>{{ chamado[9] }}</td>
+      {% endif %}
+      <td>
+        <a href="/editarchamado/{{ chamado[0]}}" class="editar">Editar</a>
+      </td>
+      <td>
+        {% if chamado[6] == None%}
+        <a href="/atender_chamado/{{ chamado[0]}}" class="atender">Atender</button>
+          {% elif chamado[8] != None%}
+          <h1>Fechado</h1>
+          {%else%}
+          <button>Em Atendimento</button>
+          {% endif %}
+
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+<div class="divimg">
+  <img class="imgpython" src="{{url_for('static', filename='giphy.gif')}}">
+  <!--Cria uma imagem.-->
+</div>
+<!--A expressão {{chamados}} é uma instrução Jinja que é usada para inserir os dados da variável chamados no template HTML.-->
+
+{%endblock%}

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{url_for('static', filename='style.css')}}">
+    <title>Login</title>
+</head>
+
+<body style="text-align: center;font-size: 25px;font-family: Segoe UI;">
+    <div>
+        <img class="imgpython" src="{{url_for('static', filename='giphy.gif')}}">
+        <h1 style="text-align: center; font-size: 25px; font-family: Segoe UI;">Sistema de chamados Flask</h1>
+
+        <form method="POST" action="/validalogin{{id}}">
+            <div>
+                <input class="inputlogin" type="text" name="email" placeholder="Email" required>
+            </div>
+            <div>
+                <input style="margin: 10px" class="inputlogin" type="password" name="senha" placeholder="Senha" required>
+            </div>
+
+            <button type="submit" class="botaologin">Entrar</button>
+            <div style="margin: 10px">
+                <button type="submit" class="botaologin">Esqueci minha senha</button>
+            </div>
+            <div style="margin: 10px">
+                <button type="submit" class="botaologin">Solicitar conta</button>
+            </div>
+            <div>
+                <button type="submit" class="botaologin">Sair</button>
+            </div>
+        </form>
+    </div>
+</body>
+
+</html>

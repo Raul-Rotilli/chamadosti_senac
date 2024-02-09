@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta http-equiv="X-UA-Compatibile" content="IE=edge">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="{{url_for('static', filename='style.css')}}">
+
+    <title>
+        {% block titulo %}
+        {% endblock %}
+
+    </title>
+    <!--Define o título da página.-->
+</head>
+
+<body>
+    <nav class="navbar">
+        <!--Cria uma barra de navegação.-->
+        <div class="container">
+            <!---->
+            <div class="container">
+                <!---->
+                <a class="navbar-brand" href=#>Chamados TI</a>
+                <!--Cria um link para a página inicial.-->
+                <a class="navbar-brand1" href="{{url_for('pagina_inicial')}}">Página Inicial</a>
+                <li class="dropdown">
+                    <a class="dropbtn" href="#">Tabelas</a>
+                    <div class="dropdown-content">
+                        <a class="navbar-brand1" href="{{url_for('pagina_usuarios')}}">Usuários</a>
+                        {% if session['perfil'] != 'usuario' %}
+                        <a class="navbar-brand1" href="{{url_for('pagina_tecnicos')}}">Técnicos</a>
+                        {% endif %}
+                        <a class="navbar-brand1" href="{{url_for('pagina_chamados')}}">Chamados</a>
+                        {% if session['perfil'] != 'usuario' %}
+                        <a class="navbar-brand1" href="{{url_for('pagina_setores')}}">Setores</a>
+                        {% endif %}
+                    </div>
+                </li>
+                <div class="navbar-collapse">
+                    <!---->
+                </div>
+                <!---->
+            </div>
+            <!---->
+            <div class="navbar-nav">
+                <!---->
+                <a class="nav-link" href="{{url_for('pagina_login')}}">Login</a>
+                <!--Cria um link para a página de login.-->
+                {% block cadastro %}
+                {% endblock %}
+            </div>
+        </div>
+        </div>
+    </nav>
+    {%block conteudo%}
+
+    {% endblock %}
+
+</body>
+
+</html>
