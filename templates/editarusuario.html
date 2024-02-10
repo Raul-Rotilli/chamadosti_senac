@@ -22,10 +22,12 @@ Editar Usuário
             Por favor, edite os dados do usuário
 
             <form method="POST" action="/editarusuario/{{usuario[0]}}">
+                {%if perfil == 'tecnico'%}
                 <div>
                     <input style="margin: 5px" class="inputlogin" type="text" name="nome" placeholder="Nome"
                         value="{{usuario[1]}}" required>
                 </div>
+                {%endif%}
                 <div>
                     <input style="margin: 5px" class="inputlogin" type="email" name="email" placeholder="E-mail"
                         value="{{usuario[2]}}" required>
