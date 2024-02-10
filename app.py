@@ -523,8 +523,8 @@ def atender_chamado(id):
     except mysql.connector.Error as e:
         return render_template('paginainicial.html')
     
-@app.route('/editarchamado/<id>', methods=['GET', 'POST'])
-def atualizarchamado(id):
+@app.route('/finalizarchamado/<id>', methods=['GET', 'POST'])
+def finalizarchamado(id):
     if not session.get('usuario_id'):
         return redirect(url_for('pagina_login'))
     if session.get('perfil') != 'tecnico':
@@ -533,29 +533,10 @@ def atualizarchamado(id):
     if not id.isdigit():
         return render_template('editarusuario/<id>', error='ID inválido.')
 
-    cnx = mysql.connector.connect(
-        host='127.0.0.1',
-        user='root',
-        password='',
-        database='chamadosti')
-    cursor = cnx.cursor()
-    cursor.execute("""
-        SELECT `id`, `id_usuario`, `id_equipamento`, `descricao`, `id_setor`, `data_abertura`, `id_tecnico`, `observacao` `data_fechamento`, `urgencia`, `solucao`
-        FROM chamados
-        WHERE id = %s;
-    """, (id,))
-    dados_chamado = cursor.fetchone()
-    cursor.close()
-    cnx.close()
-
     # Processa o formulário
     if request.method == 'POST':
         try:
-            id_equipamento = request.form.get('id_equipamento')
-            id_setor = request.form.get('id_setor')
-            observacao = request.form.get('observacao')
-            # Realiza a atualização no banco de dados
-            # Realiza a atualização no banco de dados
+            solucao = request.form.get('solucao')
             cnx = mysql.connector.connect(
                 host='127.0.0.1',
                 user='root',
@@ -563,8 +544,8 @@ def atualizarchamado(id):
                 database='chamadosti'
             )
             cursor = cnx.cursor()
-            sql = 'UPDATE chamados SET id_equipamento = %s, id_setor = %s, observacao = %s WHERE id = %s;'
-            values = (id_equipamento, id_setor, observacao, id)
+            sql = 'UPDATE chamados SET solucao = %s, data_fechamento = NOW()  WHERE id = %s;'
+            values = (solucao, id)
             cursor.execute(sql, values)
             cnx.commit()
             cursor.close()
@@ -574,7 +555,7 @@ def atualizarchamado(id):
             return render_template('paginainicial.html')
             # Redireciona para a página inicial
 
-    return render_template('editarchamado.html', id=id, chamado=dados_chamado)
+    return render_template('finalizarchamado.html', id=id)
 
 
 

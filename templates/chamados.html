@@ -56,13 +56,13 @@ Chamados TI
         <a href="/editarchamado/{{ chamado[0]}}" class="editar">Editar</a>
       </td>
       <td>
-        {% if chamado[6] == None%}
+        {% if chamado[6] == None %}
         <a href="/atender_chamado/{{ chamado[0]}}" class="atender">Atender</button>
-          {% elif chamado[8] != None%}
-          <h1>Fechado</h1>
-          {%else%}
-          <button>Em Atendimento</button>
-          {% endif %}
+          {% elif chamado[8] == None %}
+          <a href="/finalizarchamado/{{ chamado[0]}}" class="atender">Finalizar</button>
+            {% else %}
+            <h1>Fechado</h1>
+            {% endif %}
 
       </td>
     </tr>
