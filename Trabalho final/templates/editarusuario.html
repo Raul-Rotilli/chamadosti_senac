@@ -1,0 +1,64 @@
+{% extends 'template.html' %}
+
+{% block titulo %}
+
+
+Editar Usuário
+
+
+{% endblock %}
+
+{% block conteudo %}
+
+
+<body style="text-align: center;  font-family: Segoe UI;">
+
+
+
+    <div>
+
+        <img class="imgpython" src="{{url_for('static', filename='giphy.gif')}}">
+        <h1 style="text-align: center; font-size: 25px; font-family: Segoe UI;">
+            Por favor, edite os dados do usuário
+
+            <form method="POST" action="/editarusuario/{{usuario[0]}}">
+                {%if perfil == 'tecnico'%}
+                <div>
+                    <input style="margin: 5px" class="inputlogin" type="text" name="nome" placeholder="Nome"
+                        value="{{usuario[1]}}" required>
+                </div>
+                {%endif%}
+                <div>
+                    <input style="margin: 5px" class="inputlogin" type="email" name="email" placeholder="E-mail"
+                        value="{{usuario[2]}}" required>
+
+                </div>
+                <div>
+                    <input style="margin: 5px" type="password" class="inputlogin" type="senha" name="senha"
+                        placeholder="Senha" value="{{usuario[3]}}" required>
+                </div>
+    </div>
+    {% set mensagens = get_flashed_messages()%}
+    {% if mensagens%}
+    <div class=class="msg-alertas">
+        {%for msg in mensagens%}
+        <span class="ms erro"><i class="icon icon-hand-paper-o"></i>{{(msg)}}</span>
+
+    </div>
+    {%endfor%}
+
+    {%endif%}
+    <br>
+    <button class="botaologin" type="submit">Atualizar</button>
+
+
+
+
+    </form>
+    <br>
+
+    </div>
+
+
+</body>
+{% endblock %}

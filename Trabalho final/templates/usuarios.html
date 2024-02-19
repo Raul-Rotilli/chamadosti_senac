@@ -1,0 +1,69 @@
+{% extends "template.html" %}
+{%block titulo%}
+Usuários TI
+{%endblock%}
+
+{% block cadastro %}
+<a class="nav-link" href="{{url_for('cadastro_usuario')}}">Cadastro</a>
+{% endblock %}
+{% block conteudo%}
+
+<h2 style="text-align: center; font-size: 25px; font-family: Segoe UI;">Usuários</h2>
+
+<table>
+    <thead>
+        <tr>
+            <th>Nome</th>
+            <th>Email</th>
+            <th>Cargo</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        {% for usuario in usuarios %}
+        <tr>
+            <td>{{ usuario[1] }}</td>
+            <td>{{ usuario[2] }}</td>
+            <td>{{ usuario[4] }}</td>
+            <td>
+               <button onclick="confirmar( {{usuario[0]}})" > <a href="" class="excluir">Excluir</a></button>
+            <a href="/editarusuario/{{ usuario[0]}}" class="editar">Editar</a>
+
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+<div class="divimg">
+    <img class="imgpython" src="{{url_for('static', filename='giphy.gif')}}">
+</div>
+
+
+
+
+<script>
+
+    function confirmar(usuario)
+
+    {
+        console.log(usuario)
+    var confirmacao = confirm('Tem certeza que quer excluir o usuario?')
+    if (confirmacao){
+        window.location.href = "/excluir_usuario/"+usuario
+        window.location.href = "/usuarios"
+    }
+    else{
+        window.location.href = "/paginainicial"
+
+    }
+
+    }
+
+</script>
+
+
+
+
+
+
+{%endblock%}

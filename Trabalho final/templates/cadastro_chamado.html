@@ -1,0 +1,37 @@
+{% extends 'template.html' %}
+
+{% block titulo %}
+Fazer Chamado
+{% endblock %}
+
+{% block conteudo %}
+
+<body style="text-align: center;  font-family: Segoe UI;">
+    <div>
+        <img class="imgpython" src="{{url_for('static', filename='giphy.gif')}}">
+        <h1 style="text-align: center; font-size: 25px; font-family: Segoe UI;">
+            Fazer Chamado
+        </h1>
+
+        <div id="error-alert" class="alert alert-danger" role="alert" style="display: none;">
+            <strong>Erro:</strong> {{ error }}
+        </div>
+
+        <form method="POST" action="/cadastro_chamado">
+            <div>
+                <input style="margin: 5px" class="inputlogin" type="text" name="descricao" placeholder="Descrição">
+            </div>
+            <select name="setor" id="setor">
+                {% for setor in setores %}
+                <option value="{{ setor[0] }}">{{ setor[1] }}</option>
+                {%endfor%}
+            </select>
+
+            <br>
+            <button class="botaologin" type="submit">Chamar</button>
+        </form>
+    </div>
+
+
+</body>
+{% endblock %}
