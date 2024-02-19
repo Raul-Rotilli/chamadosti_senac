@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <title>Login</title>
+    <style>
+        body{
+
+            background: rgb(247,139,31);
+            background: linear-gradient(90deg, rgba(247,139,31,1) 0%, rgba(0,85,148,1) 50%, rgba(255,255,255,1) 100%);
+        }
+    </style>
+    </head>
+    <body>
+
+        <div class="caixatexto">
+            <p class="text">Chamados TI Senac-RS</p>
+        </div>
+        <div class="container glass">
+            <div class="divlogin">
+                
+                <form method="POST" action="/validalogin{{id}}">
+                    <div>
+                        <input class="inputlogin" type="text" name="nome_usuario" placeholder="Nome de Usuário">
+                    </div>
+                    <div>
+                        <input class="inputlogin" type="password" name="senha" placeholder="Senha">
+                    </div>
+
+                    <button type="submit" class="botaologin">Entrar </button>
+                    <div>
+                        <button type="submit" class="botaologin">Esqueci minha senha</button>
+                    </div>
+                    <div>
+                        <button type="submit" class="botaologin">Solicitar conta</button>
+                    </div>
+                    <div>
+                        <button type="submit" class="botaologin">Sair</button>
+                    </div>
+                </form>
+                
+            </div>
+        </div>
+    </body>
+</html>

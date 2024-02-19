@@ -1,0 +1,45 @@
+{% extends 'template.html' %}
+
+{% block titulo %}
+Formulário de Cadastro
+{% endblock %}
+
+{% block conteudo %}
+
+<body style="text-align: center;  font-family: Segoe UI;">
+    <div>
+        <img class="imgpython" src="{{url_for('static', filename='giphy.gif')}}">
+        <h1 style="text-align: center; font-size: 25px; font-family: Segoe UI;">
+            Por favor, crie uma conta
+        </h1>
+
+        <div id="error-alert" class="alert alert-danger" role="alert" style="display: none;">
+            <strong>Erro:</strong> {{ error }}
+        </div>
+
+        <form method="POST" action="/cadastro_usuario">
+            <div>
+                <select name="perfil" id="perfil" required>
+                    <option value="" disabled selected>O tipo de usuário</option>
+                    <option value="usuario">Usuário</option>
+                    <option value="tecnico">Técnico</option>
+                </select>
+            </div>
+            <div>
+                <input style="margin: 5px" class="inputlogin" type="text" name="nome" placeholder="Nome" required>
+            </div>
+            <div>
+                <input style="margin: 5px" class="inputlogin" type="email" name="email" placeholder="E-mail" required>
+            </div>
+            <div>
+                <input style="margin: 5px" class="inputlogin" minlength="8" type="password" name="senha" placeholder="Senha" required>
+            </div>
+
+            <br>
+            <button class="botaologin" type="submit">Cadastrar</button>
+        </form>
+    </div>
+
+
+</body>
+{% endblock %}

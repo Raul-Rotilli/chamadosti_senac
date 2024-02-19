@@ -1,0 +1,62 @@
+{% extends 'template.html' %}
+
+{% block titulo %}
+
+
+Editar Chamado
+
+
+{% endblock %}
+
+{% block conteudo %}
+
+
+<body style="text-align: center;  font-family: Segoe UI;">
+
+
+
+    <div>
+
+        <img class="imgpython" src="{{url_for('static', filename='giphy.gif')}}">
+        <h1 style="text-align: center; font-size: 25px; font-family: Segoe UI;">
+            Por favor, edite os dados do chamado
+
+            <form method="POST" action="/editarchamado/{{chamado[0]}}">
+                <div>
+                    <input style="margin: 5px" class="inputlogin" type="text" name="id_equipamento"
+                        placeholder="id_equipamento" value="{{chamado[2]}}" required>
+                </div>
+                <div>
+                    <input style="margin: 5px" class="inputlogin" type="text" name="id_setor" placeholder="id_setor"
+                        value="{{chamado[4]}}" required>
+
+                </div>
+                <div>
+                    <input style="margin: 5px" class="inputlogin" type="text" name="observacao" placeholder="observacao"
+                        value="{{chamado[7]}}" required>
+                </div>
+    </div>
+    {% set mensagens = get_flashed_messages()%}
+    {% if mensagens%}
+    <div class=class="msg-alertas">
+        {%for msg in mensagens%}
+        <span class="ms erro"><i class="icon icon-hand-paper-o"></i>{{(msg)}}</span>
+
+    </div>
+    {%endfor%}
+
+    {%endif%}
+    <br>
+    <button class="botaologin" type="submit">Atualizar</button>
+
+
+
+
+    </form>
+    <br>
+
+    </div>
+
+
+</body>
+{% endblock %}

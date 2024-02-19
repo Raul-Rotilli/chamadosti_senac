@@ -1,0 +1,48 @@
+{% extends "template.html" %}
+{%block titulo%}
+Técnicos TI
+{%endblock%}
+{% block cadastro %}
+<a class="nav-link" href="{{url_for('cadastro_usuario')}}">Cadastro</a>
+{% endblock %}
+{% block conteudo%}
+<h2 style="text-align: center; font-size: 25px; font-family: Segoe UI;">Técnicos</h2>
+
+<table>
+    <thead>
+        <tr>
+            <th>Nome</th>
+            <th>Email</th>
+            <th>Cargo</th>
+            <th>Status</th>
+            <th>Justificativa</th>
+            <th>Data Inicial</th>
+            <th>Data Final</th>
+
+        </tr>
+    </thead>
+
+    <tbody>
+        {% for tecnico in tecnicos %}
+        <tr>
+            <td>{{ tecnico[1] }}</td>
+            <td>{{ tecnico[2] }}</td>
+            <td>{{ tecnico[4] }}</td>
+            <td>{{ tecnico[5] }}</td>
+            <td>{{ tecnico[6] }}</td>
+            <td>{{ tecnico[7] }}</td>
+            <td>{{ tecnico[8] }}</td>
+            <td>
+                <a href="/excluir_tecnico/{{ tecnico[0]}}" class="excluir">Excluir</a>
+                <a href="/excluir_tecnico/{{ tecnico[0]}}" class="editar">Editar</a>
+
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+<div class="divimg">
+    <img class="imgpython" src="{{url_for('static', filename='giphy.gif')}}">
+</div>
+
+{%endblock%}
