@@ -1,6 +1,8 @@
 /* Reset básico */
 html,
 body {
+  width: 100%;
+  height: 100%;
   margin: 0;
   /* Remove margens padrão */
   padding: 0;
@@ -203,22 +205,92 @@ button.excluir {
   color: white;
 }
 
-.botaologin {
-  width: 200px;
-  height: 40px;
-  background-color: #01498C;
-  color: white;
-  border-color: yellow
+/*login*/
+.caixatexto{ display: inline-block;
+  padding: 20px;}
+
+.text{
+  
+  color: snow;
+  font-size: 2em;
+  letter-spacing: 10px;
+  font-family: monospace;
+  border-right: 5px solid;
+  width: 100% ;
+  white-space: nowrap;
+  overflow: hidden;
+  animation: 
+    typing 3s steps(20),
+    cursor .4s step-end infinite alternate;
+
 }
 
-.inputlogin {
-  border-color: yellow;
-  color: black;
-  border-radius: 5px;
+
+@keyframes cursor{
+  50%  {border-color: transparent}
+}
+
+@keyframes typing {
+  from{width: 0}
+}
+
+.container{
+  justify-self: center;
+  align-items: center;
+  margin-top: 100px;
+  width: 500px;
+  height: 400px;
+  margin: 20px auto;
+}
+
+.glass{
+  margin-top: 100px;/*alterado*/
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0));
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-radius: 20px;
+  border:1px solid rgba(255, 255, 255, 0.18);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+}
+
+.divlogin { /*alterado*/
+  font-family: 'Archivo Black', sans-serif;
+  text-align: center;
+  justify-self: center;
+  align-items: center;
+  margin-top: 30px;
+}
+
+.inputlogin{
+  color: rgb(3, 3, 3);
+  border-color: seashell; 
+  border-radius: 10px;
+  margin-top: 20px;
+  margin: 10px;
   padding: 10px 20px;
   width: 160px;
   height: 20px;
+  outline: none
+  /* remove a borda do botão*/
 }
+
+.botaologin {
+  color: seashell;
+  border: 1px solid transparent;
+  border-radius: 10px;
+  margin: 5px;
+  height: 40px;
+  width: 200px;
+  background-color: #0f456e;
+  transition: 0.3s;
+}
+
+.botaologin:hover { /*modificado*/
+  -webkit-box-shawdow:0px 0px 30px 3px #6fb3e6;
+  -moz-box-shadow: 0px 0px 30px 3px #6fb3e6;
+  box-shadow: 0px 0px 30px 3px #6fb3e6;
+}
+/*fim login*/
 
 select {
   border-color: yellow;
@@ -288,12 +360,4 @@ select {
 
 .dropdown:hover .dropdown-content {
   display: block;
-}
-
-button{
-
-padding: 0%;
-margin: 0%;
-border-style: none;
-
 }
