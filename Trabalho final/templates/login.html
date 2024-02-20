@@ -1,40 +1,48 @@
 <!DOCTYPE html>
-<html lang="pt-br">
-
-<head>
+<html lang="en">
+    <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{{url_for('static', filename='style.css')}}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
     <title>Login</title>
-</head>
+    <style>
+        body{
 
-<body style="text-align: center;font-size: 25px;font-family: Segoe UI;">
-    <div>
-        <img class="imgpython" src="{{url_for('static', filename='giphy.gif')}}">
-        <h1 style="text-align: center; font-size: 25px; font-family: Segoe UI;">Sistema de chamados Flask</h1>
+            background: rgb(247,139,31);
+            background: linear-gradient(90deg, rgba(247,139,31,1) 0%, rgba(0,85,148,1) 50%, rgba(255,255,255,1) 100%);
+            
+            
+            
 
-        <form method="POST" action="/validalogin{{id}}">
-            <div>
-                <input class="inputlogin" type="text" name="email" placeholder="Email" required>
-            </div>
-            <div>
-                <input style="margin: 10px" class="inputlogin" type="password" name="senha" placeholder="Senha" required>
-            </div>
+        }
+    </style>
+    </head>
+    <body>
 
-            <button type="submit" class="botaologin">Entrar</button>
-            <div style="margin: 10px">
-                <button type="submit" class="botaologin">Esqueci minha senha</button>
-            </div>
-            <div style="margin: 10px">
+        <div class="caixatexto">
+            <p class="text">Chamados TI Senac-RS</p>
+        </div>
+        <div class="container glass">
+            <div class="divlogin">
                 
-            <a class="nav-link" href="{{url_for('cadastro_usuario')}}">Cadastro</a>
-            </div>
-            <div>
-                <button type="submit" class="botaologin">Sair</button>
-            </div>
-        </form>
-    </div>
-</body>
+                <form method="POST" action="/validalogin{{id}}">
+                    <div>
+                        <input class="inputlogin" type="text" name="nome_usuario" placeholder="Nome de Usuário">
+                    </div>
+                    <div>
+                        <input class="inputlogin" type="password" name="senha" placeholder="Senha">
+                    </div>
 
+                    <button type="submit" class="botaologin">Entrar </button>
+                    <div>
+                        <button type="submit" class="botaologin">Esqueci minha senha</button>
+                    </div>
+                    <div>
+                        <button type="submit" class="botaologin">Solicitar conta</button>
+                    </div>
+                </form>
+                
+            </div>
+        </div>
+    </body>
 </html>
