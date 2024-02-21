@@ -16,6 +16,7 @@ Usuários TI
             <th>Nome</th>
             <th>Email</th>
             <th>Cargo</th>
+            <th>Ações</th>
         </tr>
     </thead>
 
@@ -26,8 +27,8 @@ Usuários TI
             <td>{{ usuario[2] }}</td>
             <td>{{ usuario[4] }}</td>
             <td>
-                <a href="/excluir_usuario/{{ usuario[0]}}" class="excluir">Excluir</a>
-                <a href="/editarusuario/{{ usuario[0]}}" class="editar">Editar</a>
+               <button class="excluir" onclick="confirmar( {{usuario[0]}})" > Excluir</button>
+            <a href="/editarusuario/{{ usuario[0]}}" class="editar">Editar</a>
 
             </td>
         </tr>
@@ -37,5 +38,27 @@ Usuários TI
 <div class="divimg">
     <img class="imgpython" src="{{url_for('static', filename='giphy.gif')}}">
 </div>
+
+
+
+
+<script>
+
+    function confirmar(usuario)
+
+    {
+    var confirmacao = confirm('Tem certeza que quer excluir o usuario?')
+    console.log(confirmacao)
+    if (confirmacao){
+        window.location.href = "/excluir_usuario/"+usuario
+    }
+    }
+
+</script>
+
+
+
+
+
 
 {%endblock%}
