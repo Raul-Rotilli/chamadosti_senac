@@ -1,0 +1,52 @@
+{% extends 'template.html' %}
+
+{% block titulo %}
+
+
+Editar Chamado
+
+
+{% endblock %}
+
+{% block conteudo %}
+
+
+<body style="text-align: center;  font-family: Segoe UI;">
+
+
+
+    <div>
+
+        <img class="imgpython" src="{{url_for('static', filename='giphy.gif')}}">
+        <h1 style="text-align: center; font-size: 25px; font-family: Segoe UI;">
+
+            <form method="POST" action="/finalizarchamado/{{id}}">
+                <div>
+                    <input style="margin: 5px" class="inputlogin" type="text" name="solucao"
+                        placeholder="Qual foi a solução?" required>
+                </div>
+    </div>
+    {% set mensagens = get_flashed_messages()%}
+    {% if mensagens%}
+    <div class=class="msg-alertas">
+        {%for msg in mensagens%}
+        <span class="ms erro"><i class="icon icon-hand-paper-o"></i>{{(msg)}}</span>
+
+    </div>
+    {%endfor%}
+
+    {%endif%}
+    <br>
+    <button class="botaologin" type="submit">Atualizar</button>
+
+
+
+
+    </form>
+    <br>
+
+    </div>
+
+
+</body>
+{% endblock %}

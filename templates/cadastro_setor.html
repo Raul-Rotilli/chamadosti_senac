@@ -1,0 +1,32 @@
+{% extends 'template.html' %}
+
+{% block titulo %}
+Formulário de Cadastro de Setor
+{% endblock %}
+
+{% block conteudo %}
+
+<body style="text-align: center;  font-family: Segoe UI;">
+    <div>
+        <img class="imgpython" src="{{url_for('static', filename='giphy.gif')}}">
+        <h1 style="text-align: center; font-size: 25px; font-family: Segoe UI;">
+            Crie a um Setor
+        </h1>
+
+        <div id="error-alert" class="alert alert-danger" role="alert" style="display: none;">
+            <strong>Erro:</strong> {{ error }}
+        </div>
+
+        <form method="POST" action="/cadastro_setor">
+            <div>
+                <input style="margin: 5px" class="inputlogin" type="text" name="nome" placeholder="Nome">
+            </div>
+
+            <br>
+            <button class="botaologin" type="submit">Cadastrar</button>
+        </form>
+    </div>
+
+
+</body>
+{% endblock %}

@@ -1,0 +1,407 @@
+/* Reset básico */
+html,
+body {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  /* Remove margens padrão */
+  padding: 0;
+  /* Remove preenchimentos padrão */
+  font-family: sans-serif;
+  /* Define fonte padrão */
+  background-color: #e7e7e9;
+}
+
+/* Navbar */
+.navbar {
+  list-style-type: none;
+  background: rgb(246,140,31);
+background: linear-gradient(90deg, rgba(246,140,31,1) 0%, rgba(255,255,255,1) 35%, rgba(0,75,141,1) 100%);
+  /*Cor de Fundo*/
+  padding: 0.8rem 0;
+  /* Espaçamento interno */
+  margin-bottom: 0px;
+  /* Remove margem inferior */
+  margin-top: 0;
+  /* Remove margem superior */
+}
+
+.navbar .container-template {
+  display: flex;
+  /* Layout flexível */
+  justify-content: space-between;
+  /* Distribui itens nas extremidades */
+  align-items: center;
+  /* Centraliza verticalmente */
+
+}
+
+.navbar-brand {
+  color: #fff;
+  /* Cor do texto branca */
+  font-size: 15px;
+  /* Tamanho da fonte */
+  text-decoration: none;
+  /* Remove sublinhado */
+  margin-left: 0.3cm;
+  /* Margem esquerda */
+  font-family: Segoe UI;
+  /* Fonte Segoe UI */
+
+}
+
+.navbar-brand1 {
+  color: #fff;
+  font-size: 15px;
+  text-decoration: none;
+  margin-left: 0.3cm;
+  font-family: Segoe UI;
+
+}
+
+.navbar-brand2 {
+  color: #ffffff;
+  font-size: 13px;
+  text-decoration: none;
+  margin-left: 0.3cm;
+  font-family: Segoe UI;
+}
+
+
+.navbar-toggler {
+  border: none;
+  /* Remove borda */
+  background-color: transparent;
+  /* Remove fundo */
+  cursor: pointer;
+  /* Define o cursor como ponteiro */
+}
+
+
+
+.navbar-collapse {
+  display: flex;
+  /* Layout flexível */
+  flex-wrap: wrap;
+  /* Permite quebra de linha em telas menores */
+  align-items: center;
+  /* Centraliza verticalmente */
+}
+
+.navbar-nav {
+  padding-left: 5px;
+  /* Espaçamento interno à esquerda */
+  padding-right: 5px;
+  /* Espaçamento interno à direita */
+}
+
+.navbar-nav .nav-link {
+  color: #ccc;
+  /* Cor do texto cinza claro */
+  text-decoration: none;
+  /* Remove sublinhado */
+  font-size: 13px;
+  /* Tamanho da fonte */
+  margin-right: 0.2cm;
+  /* Margem direita */
+  font-family: Segoe UI;
+  /* Fonte Segoe UI */
+  transition: color 0.3s
+    /* Anima a cor ao passar o mouse */
+}
+
+.navbar .nav-link:hover {
+  color: #fff;
+  /* Cor branca ao passar o mouse */
+}
+
+.navbar-nav .nav-link1 {
+  color: #fff;
+  /* Cor do texto branca */
+  text-decoration: none;
+  /* Remove sublinhado */
+  font-size: 12px;
+  /* Tamanho da fonte */
+  margin-left: 0.2cm;
+  /* Margem esquerda */
+  font-family: Segoe UI;
+  /* Fonte Segoe UI */
+
+}
+
+
+
+
+
+h2 {
+  margin-top: 0px;
+  /* Remove margem superior */
+}
+
+.divimg {
+  text-align: center;
+  /* Centraliza o conteúdo */
+}
+
+
+.imgpython {
+  width: 150px;
+  /* Largura da imagem */
+  height: 150px;
+  /* Altura da imagem */
+}
+
+table {
+  width: 100%;
+  /*Define a largura da tabela para ocupar o espaço total disponível.*/
+  border-collapse: collapse;
+  /* Faz com que as bordas das células da tabela se encontrem, eliminando espaço entre elas.*/
+  border-top: 1px solid #ddd;
+  /*Adiciona uma linha horizontal sólida de 1px de espessura na cor #ddd (cinza claro) na parte superior da tabela.*/
+  border-bottom: 1px solid #ddd;
+  /*Adiciona uma linha horizontal sólida de 1px de espessura na cor #ddd na parte inferior da tabela*/
+}
+
+th,
+td {
+  padding: 10px;
+  /* Adiciona um espaçamento interno de 10px em todas as direções às células da tabela (cabeçalho e corpo)*/
+  text-align: left;
+  /*Alinha o texto das células à esquerda.*/
+  border-right: 1px solid #ddd;
+  /*Adiciona uma linha vertical sólida de 1px de espessura na cor #ddd à direita de cada célula da tabela.*/
+}
+
+th {
+  text-align: center;
+  font-weight: bold;
+  /*Torna o texto das células do cabeçalho (th) negrito.*/
+  border-bottom: 2px solid #ddd;
+  /*Adiciona uma linha horizontal sólida de 2px de espessura na cor #ddd na parte inferior das células do cabeçalho.*/
+}
+
+td {
+  text-align: center;
+  border-bottom: 1px solid #ddd;
+  /*Adiciona uma linha horizontal sólida de 1px de espessura na cor #ddd na parte inferior das células do corpo (td).*/
+}
+
+.table-hover tbody tr:hover {
+  background-color: #eee;
+  /*Muda o fundo da linha para a cor #eee (cinza claro) quando o mouse passar sobre ela.*/
+}
+
+button {
+  border-radius: 5px;
+  padding: 10px 20px;
+  font-size: 16px;
+  font-family: sans-serif;
+}
+
+.editar {
+  background-color: #01498C;
+  color: white;
+  border-radius: 3px;
+}
+
+.excluir {
+  background-color: red;
+  color: white;
+  border-radius: 3px;
+}
+
+/*login*/
+.logosenac{
+  width: 150px;  
+  height: 150px;
+  
+}
+
+.caixatexto{
+  display: inline-block;
+  padding: 20px;
+  
+}
+
+.text{
+  padding-left: 25px;
+  color: snow;
+  font-size: 2em;
+  letter-spacing: 10px;
+  font-family: monospace;
+  border-right: 5px solid;
+  width: 95% ;
+  white-space: nowrap;
+  overflow: hidden;
+  animation: 
+    typing 3s steps(20),
+    cursor .4s step-end infinite alternate;
+
+}
+
+
+@keyframes cursor{
+  50%  {border-color: transparent}
+}
+
+@keyframes typing {
+  from{width: 0}
+}
+
+.container{
+  justify-self: center;
+  align-items: center;
+  margin-top: 100px;
+  width: 500px;
+  height: 400px;
+  margin: 20px auto;
+}
+
+.glass{
+  margin-top: 100px;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0));
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-radius: 20px;
+  border:1px solid rgba(255, 255, 255, 0.18);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+}
+
+.divlogin { 
+  font-family: 'Archivo Black', sans-serif;
+  text-align: center;
+  justify-self: center;
+  align-items: center;
+  margin-top: 30px;
+}
+
+
+.inputlogin{
+  color: rgb(3, 3, 3);
+  border-color: seashell; 
+  border-radius: 10px;
+  margin-top: 20px;
+  margin: 10px;
+  padding: 10px 30px;
+  width: 160px;
+  height: 20px;
+  outline: none;
+  font-size: 16px;
+  /* remove a borda do botão*/
+}
+
+pass{
+  position: relative;
+}
+
+user{
+  position: relative;
+}
+
+.user i{
+  font-size: 15px; 
+  cursor: pointer;
+  position: absolute;
+  right: 30%; 
+  top: 14%;
+  color: gray;
+
+}
+.pass i{
+  font-size: 15px; 
+  cursor: pointer;
+  position: absolute;
+  right: 30%; 
+  top: 29%;
+  color: gray;
+
+}
+
+
+.botaologin {
+  color: seashell;
+  border: 1px solid transparent;
+  border-radius: 10px;
+  margin: 5px;
+  height: 40px;
+  width: 200px;
+  background-color: #0f456e;
+  transition: 0.3s;
+}
+
+.botaologin:hover { 
+  -webkit-box-shawdow:0px 0px 30px 3px #6fb3e6;
+  -moz-box-shadow: 0px 0px 30px 3px #6fb3e6;
+  box-shadow: 0px 0px 30px 3px #6fb3e6;
+}
+/*fim login*/
+
+select {
+  border-color: yellow;
+  color: rgba(0, 0, 0, 0.637);
+  border-radius: 5px;
+  width: 205px;
+  height: 40px;
+  padding-left: 15px;
+}
+
+
+.excluir {
+  display: inline-block;
+  padding: 10px 20px;
+  border: 1px solid black;
+  background-color: red;
+  color: white;
+  text-decoration: none
+}
+
+.editar {
+  display: inline-block;
+  padding: 10px 20px;
+  border: 1px solid black;
+  background-color: #01498C;
+  color: white;
+  text-decoration: none
+}
+
+.atender {
+  display: inline-block;
+  padding: 10px 20px;
+  border: 1px solid black;
+  background-color: #8c0101;
+  color: white;
+  text-decoration: none
+}
+
+.dropdown {
+  position: relative;
+  padding-left: 10px;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  min-width: 160px;
+  z-index: 1;
+}
+
+.dropbtn {
+  text-decoration: none;
+  color: #ffffff;
+  font-size: 13px;
+}
+
+.dropdown-content a {
+  color: #ffffff;
+  font-size: 13px;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  text-align: left;
+  background-color: #fd7e14;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
