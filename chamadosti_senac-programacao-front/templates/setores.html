@@ -20,7 +20,7 @@ Setores
         <tr>
             <td>{{ setor[1] }}</td>
             <td>
-                <a href="/excluir_setor/{{ setor[0]}}" class="excluir">Excluir</a>
+                <button class="excluir" onclick="confirmar( {{setor[0]}})" >Excluir</button>
                 <a href="/excluir_setor/{{ setor[0]}}" class="editar">Editar</a>
 
             </td>
@@ -31,5 +31,26 @@ Setores
 <div class="divimg">
     <img class="imgpython" src="{{url_for('static', filename='giphy.gif')}}">
 </div>
+
+
+
+
+<script>
+
+    function confirmar(setor)
+
+    {
+        console.log(setor)
+    var confirmacao = confirm('Tem certeza que quer excluir o setor?')
+    if (confirmacao){
+        window.location.href = "/excluir_setor/"+setor
+    }
+
+    }
+
+</script>
+
+
+
 
 {%endblock%}
