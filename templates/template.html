@@ -29,8 +29,10 @@
         <div class="container-template">
             <!---->
             <div class="container-template">
+
+                <img class="navbar-brand" src="{{url_for('static', filename='do-utilizador.png')}}">
                 <!---->
-                <a class="navbar-brand" href=#>Chamados TI</a>
+                <a class="navbar-brand" href="#">Chamados TI</a>
                 <!--Cria um link para a página inicial.-->
                 <a class="navbar-brand1" href="{{url_for('pagina_inicial')}}">Página Inicial</a>
                 <li class="dropdown">
@@ -54,7 +56,7 @@
             <!---->
             <div class="navbar-nav">
                 <!---->
-                <a class="nav-link" href="{{url_for('pagina_login')}}">Login</a>
+                <a class="nav-link" href="{{url_for('pagina_login')}}">Sair</a>
                 <!--Cria um link para a página de login.-->
                 {% block cadastro %}
                 {% endblock %}
