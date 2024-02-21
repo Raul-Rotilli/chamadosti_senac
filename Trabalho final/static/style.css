@@ -25,7 +25,7 @@ body {
   /* Remove margem superior */
 }
 
-.navbar .container {
+.navbar .container-template {
   display: flex;
   /* Layout flexível */
   justify-content: space-between;
@@ -172,6 +172,7 @@ td {
 }
 
 th {
+  text-align: center;
   font-weight: bold;
   /*Torna o texto das células do cabeçalho (th) negrito.*/
   border-bottom: 2px solid #ddd;
@@ -179,6 +180,7 @@ th {
 }
 
 td {
+  text-align: center;
   border-bottom: 1px solid #ddd;
   /*Adiciona uma linha horizontal sólida de 1px de espessura na cor #ddd na parte inferior das células do corpo (td).*/
 }
@@ -195,14 +197,16 @@ button {
   font-family: sans-serif;
 }
 
-button.editar {
+.editar {
   background-color: #01498C;
   color: white;
+  border-radius: 3px;
 }
 
-button.excluir {
+.excluir {
   background-color: red;
   color: white;
+  border-radius: 3px;
 }
 
 /*login*/
@@ -337,7 +341,6 @@ select {
 .dropdown-content {
   display: none;
   position: absolute;
-  background-color: #f9f9f9;
   min-width: 160px;
   z-index: 1;
 }
