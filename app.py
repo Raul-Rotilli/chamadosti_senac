@@ -271,6 +271,23 @@ def pagina_setores():
     setores = cursor.fetchall()
     return render_template("setores.html", setores=setores)
 
+@app.route('/equipamentos')
+def pagina_equipamentos():
+    if not session.get('usuario_id'):
+        return redirect(url_for('pagina_login'))
+    if session.get('perfil') != 'tecnico':
+        return redirect(url_for('pagina_inicial'))
+    cnx = mysql.connector.connect(
+        host='127.0.0.1',
+        user='root',
+        password='',
+        database='chamadosti'
+    )
+    cursor = cnx.cursor()
+    cursor.execute('SELECT * FROM equipamentos')
+    equipamentos = cursor.fetchall()
+    return render_template("setores.html", equipamentos=equipamentos)
+
 
 @app.route('/cadastro_usuario', methods=['POST', 'GET'],)
 def cadastro_usuario():
@@ -377,69 +394,127 @@ def cadastro_setor():
 
         except mysql.connector.Error as e:
             return render_template('pagina_setores.html', error=str(e))
+        
 
+@app.route('/cadastro_equipamento', methods=['POST', 'GET'])
+def cadastro_equipamento():
+    if not session.get('usuario_id'):
+        return redirect(url_for('pagina_login'))
+    if session.get('perfil') != 'tecnico':
+        return redirect(url_for('pagina_inicial'))
+    
+    if request.method == 'POST':
+        nome = request.form.get('nome')
+        marca = request.form.get('marca')
+        setor = request.form.get('setor')
+        conservacao = request.form.get('conservacao')
+        
+        # Verifica se algum campo está vazio
+        if not nome or not marca or not setor or not conservacao:
+            return render_template('cadastro_equipamento.html', error='Todos os campos são obrigatórios.')
+        
+        try:
+            cnx = mysql.connector.connect(
+                host='127.0.0.1',
+                user='root',
+                password='',
+                database='chamadosti'
+            )
+            cursor = cnx.cursor()
+            
+            # Executa a inserção no banco de dados
+            sql = 'INSERT INTO equipamentos (nome, id_setor, marca, conservacao) VALUES (%s, %s, %s, %s)'
+            values = (nome, setor, marca, conservacao)
+            cursor.execute(sql, values)
+            
+            cursor.close()
+            cnx.commit()
+            
+            return redirect(url_for('pagina_equipamentos'))
+        
+        except mysql.connector.Error as e:
+            return render_template('cadastro_equipamento.html', error=str(e))
+    
+    else:  # Se a solicitação não for POST, renderiza a página de cadastro com os setores
+        try:
+            cnx = mysql.connector.connect(
+                host='127.0.0.1',
+                user='root',
+                password='',
+                database='chamadosti'
+            )
+            cursor = cnx.cursor()
+            
+            # Consulta os setores no banco de dados
+            cursor.execute('SELECT * FROM setores')
+            setores = cursor.fetchall()
+            
+            cursor.close()
+            cnx.close()
+            
+            return render_template('cadastro_equipamento.html', setores=setores)
+        
+        except mysql.connector.Error as e:
+            return render_template('cadastro_equipamento.html', error=str(e))
 
+    
+        
 @app.route('/cadastro_chamado', methods=['POST', 'GET'])
 def cadastro_chamado():
     if not session.get('usuario_id'):
         return redirect(url_for('pagina_login'))
     if session.get('perfil') != 'usuario':
         return redirect(url_for('pagina_inicial'))
-    id_usuario = session.get('usuario_id')
-    descricao = request.form.get('descricao')
-    id_setor = request.form.get('setor')
-    if request.method != 'POST':
-        return render_template('cadastro_chamado.html', error='Método HTTP inválido.')
-    if not descricao:
-        return render_template('cadastro_chamado.html', error='A descrição é obrigatória.')
-    cnx = mysql.connector.connect(
-        host='127.0.0.1',
-        user='root',
-        password='',
-        database='chamadosti'
-    )
+    
+    
+    
+    if request.method == 'POST':
+        try:
+            id_usuario = session.get('usuario_id')
+            descricao = request.form.get('descricao')
+            id_setor = request.form.get('setor')
+            
+            if not descricao:
+                return render_template('cadastro_chamado.html', error='A descrição é obrigatória.')
+            cnx = mysql.connector.connect(
+                host='127.0.0.1',
+                user='root',
+                password='',
+                database='chamadosti'
+            )
 
-    cursor = cnx.cursor()
-    try:
-        cnx = mysql.connector.connect(
-            host='127.0.0.1',
-            user='root',
-            password='',
-            database='chamadosti'
-        )
-        cursor = cnx.cursor()
+            cursor = cnx.cursor()
+            
+            sql = 'INSERT INTO chamados (id_usuario, descricao, id_setor, data_abertura) values (%s, %s, %s, NOW())'
+            values = (id_usuario, descricao, id_setor)
 
-        sql = 'INSERT INTO chamados (id_usuario, descricao, id_setor, data_abertura) values (%s, %s, %s, NOW())'
-        values = (id_usuario, descricao, id_setor)
+            cursor.execute(sql, list(values))
+            cursor.close()
+            cnx.commit()
 
-        cursor.execute(sql, list(values))
-        cursor.close()
-        cnx.commit()
+            return redirect(url_for('pagina_chamados'))
+        except mysql.connector.Error as e:
+                    return render_template('cadastro_chamado.html', error=str(e))
 
-        return redirect(url_for('pagina_chamados'))
+    else:
+        try:
+            cnx = mysql.connector.connect(
+                    host='127.0.0.1',
+                    user='root',
+                    password='',
+                    database='chamadosti'
+                )
 
-    except mysql.connector.Error as e:
-        return render_template('cadastro_chamado.html', error=str(e))
+            cursor = cnx.cursor()
+            cursor.execute('SELECT * FROM setores')
+            setores = cursor.fetchall()
+            cursor.close()
+            cnx.close()
+            return render_template('cadastro_chamado.html', setores=setores)
+        except mysql.connector.Error as e:
+            return render_template('cadastro_chamado.html', error=str(e))
+                
 
-
-@app.route('/cadastrochamado', methods=['POST', 'GET'])
-def pagina_cadastro_chamado():
-    if not session.get('usuario_id'):
-        return redirect(url_for('pagina_login'))
-    if session.get('perfil') != 'usuario':
-        return redirect(url_for('pagina_inicial'))
-    cnx = mysql.connector.connect(
-        host='127.0.0.1',
-        user='root',
-        password='',
-        database='chamadosti'
-    )
-    cursor = cnx.cursor()
-    cursor.execute('SELECT * FROM setores')
-    setores = cursor.fetchall()
-    cursor.close()
-    cnx.close()
-    return render_template('cadastro_chamado.html', setores=setores)
 
 @app.route('/status_usuario/<id>', methods=['GET', 'POST'])
 def status_usuario(id):
@@ -459,7 +534,7 @@ def status_usuario(id):
         cursor = cnx.cursor()
         cursor.execute('SELECT * FROM usuarios WHERE id = %s;', (id,))
         usuario = cursor.fetchone()
-        if usuario[6] == "ativo" or usuario[6] == "None":
+        if usuario[6] == "ativo":
             cursor.execute('UPDATE usuarios SET status = %s WHERE id = %s', ('inativo', id))
             cursor.execute('INSERT INTO status (id_usuario, status, date_modificacao) VALUES (%s, %s, NOW())', (id, 'inativo'))
         else:
@@ -474,6 +549,55 @@ def status_usuario(id):
     except mysql.connector.Error as e:
         return render_template('excluir-usuario.html', error=str(e))
 
+from flask import request, redirect, url_for, session, render_template
+import mysql.connector
+
+@app.route('/status_equipamento/<id>', methods=['Get', 'POST'])
+def status_equipamento(id):
+    if not session.get('usuario_id'):
+        return redirect(url_for('pagina_login'))
+    if session.get('perfil') != 'tecnico':
+        return redirect(url_for('pagina_inicial'))
+    try:
+        cnx = mysql.connector.connect(
+            host='127.0.0.1',
+            user='root',
+            password='',
+            database='chamadosti'
+        )
+        cursor = cnx.cursor()
+
+        cursor.execute('SELECT * FROM equipamentos WHERE id = %s;', (id,))
+        equipamento = cursor.fetchone()
+
+        if equipamento is None:
+            cursor.close()
+            cnx.commit()
+            return render_template('equipamentos.html', error='Equipamento não encontrado.')
+    except mysql.connector.Error as e:
+        return render_template('equipamentos.html', error=str(e))
+            
+    if request.method == 'POST':
+        
+            if equipamento[5] == "ativo":
+                conservacao = request.form.get('conservacao')
+                justificativa = request.form.get('justificativa')
+                cursor.execute('UPDATE equipamentos SET status = %s, conservacao = %s, justificativa = %s WHERE id = %s', ('inativo', conservacao, justificativa, id))
+                cursor.execute('INSERT INTO status (id_equipamento, status, date_modificacao) VALUES (%s, %s, NOW())', (id, 'inativo'))
+                cursor.close()
+                cnx.commit()
+                return redirect(url_for('pagina_inicial'))
+
+            else:
+                conservacao = request.form.get('conservacao')
+                cursor.execute('UPDATE equipamentos SET status = %s, conservacao = %s, justificativa = %s WHERE id = %s', ('ativo', conservacao, None, id))
+                cursor.execute('INSERT INTO status (id_equipamento, status, date_modificacao) VALUES (%s, %s, NOW())', (id, 'ativo'))
+                cursor.close()
+                cnx.commit()
+                return redirect(url_for('pagina_inicial'))
+    else:
+        return render_template('status_equipamento.html', equipamento=equipamento)
+    
 
 
 @app.route('/excluir_usuario/<id>', methods=['GET', 'POST'])
@@ -730,6 +854,55 @@ def atualizarchamado(id):
             cursor.close()
             cnx.close()
             return redirect(url_for('pagina_chamados'))
+        except mysql.connector.Error as e:
+            return render_template('paginainicial.html')
+            # Redireciona para a página inicial
+
+    return render_template('editarchamado.html', id=id, chamado=dados_chamado)
+
+@app.route('/editarequipamento/<id>', methods=['GET', 'POST'])
+def atualizarequipamento(id):
+    if not session.get('usuario_id'):
+        return redirect(url_for('pagina_login'))
+    if session.get('perfil') != 'tecnico':
+        return redirect(url_for('pagina_inicial'))
+
+    if not id.isdigit():
+        return render_template('editarusuario/<id>', error='ID inválido.')
+
+    cnx = mysql.connector.connect(
+        host='127.0.0.1',
+        user='root',
+        password='',
+        database='chamadosti')
+    cursor = cnx.cursor()
+    cursor.execute("""
+        SELECT * FROM chamados
+        WHERE id = %s;
+    """, (id,))
+    dados_chamado = cursor.fetchone()
+    cursor.close()
+    cnx.close()
+
+    # Processa o formulário
+    if request.method == 'POST':
+        try:
+            conservacao = request.form.get('conservacao')
+            justificativa = request.form.get('justificativa')
+            cnx = mysql.connector.connect(
+                host='127.0.0.1',
+                user='root',
+                password='',
+                database='chamadosti'
+            )
+            cursor = cnx.cursor()
+            sql = 'UPDATE equipamentos SET conservacao = %s, justificativa = %sWHERE id = %s;'
+            values = (conservacao, justificativa, id)
+            cursor.execute(sql, values)
+            cnx.commit()
+            cursor.close()
+            cnx.close()
+            return redirect(url_for('pagina_inicial'))
         except mysql.connector.Error as e:
             return render_template('paginainicial.html')
             # Redireciona para a página inicial
