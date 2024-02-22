@@ -1,52 +1,59 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
+    <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="shortcut icon" href="{{url_for('static', filename='favicon.ico')}}"/>
     <title>Login</title>
     <style>
-        body {
+        body{
 
-            background: rgb(247, 139, 31);
-            background: linear-gradient(90deg, rgba(247, 139, 31, 1) 0%, rgba(0, 85, 148, 1) 50%, rgba(255, 255, 255, 1) 100%);
+            background: rgb(247,139,31);
+            background: linear-gradient(90deg, rgba(247,139,31,1) 0%, rgba(0,85,148,1) 50%, rgba(255,255,255,1) 100%);
+        }
+        a{
+            margin-top: 10px;
+            border-radius: 5px;
+            padding: 10px 20px;
+            font-size: 16px;
+            font-family: sans-serif;
+            text-decoration: none
         }
     </style>
-</head>
-
-<body>
-    <img class="logosenac" src="{{url_for('static', filename='logosenac.png')}}">
-    <div class="caixatexto">
-        <p class="text">Chamados TI Senac-RS</p>
-    </div>
-    <div class="container glass" style="margin-top: 0%;">
-        <div class="divlogin">
-
-            <form method="POST" action="/validalogin{{id}}">
-                <div class="user">
-                    <input class="inputlogin" type="text" name="email" placeholder="E-mail" required>
-                    <i class="bi bi-person-fill"></i>
-                </div>
-
-                <div class="pass">
-                    <input class="inputlogin" type="password" id="pass" name="senha" placeholder="Senha" required>
-                    <i class="bi bi-lock-fill" id="btn-pass" onclick="viewpass()"></i>
-                </div>
-
-                <button type="submit" class="botaologin">Entrar </button>
-                <div>
-                    <button type="submit" class="botaologin">Esqueci minha senha</button>
-                </div>
-                <div>
-                    <button type="submit" class="botaologin">Solicitar conta</button>
-                </div>
-            </form>
-
+    </head>
+    <body>
+        <img class="logosenac" src="{{url_for('static', filename='logosenac.png')}}">
+        <div class="caixatexto">
+            <p class="text">Chamados TI Senac-RS</p>
         </div>
-    </div>
-    <script src="static/login.js"></script>
-</body>
+        <div class="container glass" style="margin-top: 2%;">
+            <div class="divlogin">
+                
+                <form method="POST" action="/validalogin{{id}}">
+                    <div class="user">
+                        <input class="inputlogin" type="email" name="email" placeholder="E-mail" required>
+                        <i class="bi bi-person-fill"></i>
+                    </div>
 
+                    <div class="pass">
+                        <input class="inputlogin" type="password" id="pass" name="senha" placeholder="Senha" required>
+                        <i class="bi bi-lock-fill" id="btn-pass" onclick="viewpass()"></i>
+                    </div>
+
+                    <button type="submit" class="botaologin">Entrar </button>
+                </form>
+                
+                <div style="margin: 15px">
+                    <a style="padding: 10px 22.5px" href="/" class="botaologin">Esqueci minha senha</a>
+                </div>
+                <div style="padding: 15px ">
+                    <a style="padding: 10px 47px" href="/" class="botaologin">Solicitar conta</a>
+                </div>
+
+            </div>
+        </div>
+        <script src="static/login.js"></script>
+    </body>
 </html>
