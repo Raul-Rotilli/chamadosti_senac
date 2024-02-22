@@ -1,4 +1,5 @@
 from cgitb import html
+from errno import errorcode
 from flask import Flask, redirect, render_template, request, url_for, flash, session
 import mysql.connector
 import logging
@@ -40,12 +41,145 @@ else:
         'CREATE TABLE setores (id INT AUTO_INCREMENT PRIMARY KEY, nome VARCHAR(255));')
     cursor.execute('CREATE TABLE equipamentos (id INT AUTO_INCREMENT PRIMARY KEY, nome VARCHAR(50), id_setor int(6), marca VARCHAR(100), conservacao VARCHAR(30), status varchar(100), justificativa varchar(120), data_cadastro datetime);')
     cursor.execute(
-        'CREATE TABLE status (id INT AUTO_INCREMENT PRIMARY KEY,  id_equipamento int(6), status varchar(100), date_modificacao datetime);')
+        'CREATE TABLE status (id INT AUTO_INCREMENT PRIMARY KEY,  id_equipamento int(6), id_usuario int(6), status varchar(100), date_modificacao datetime);')
     cursor.execute('CREATE TABLE chamados (id INT AUTO_INCREMENT PRIMARY KEY, id_usuario int(6), id_equipamento int(6), descricao VARCHAR(123), id_setor int(6), data_abertura datetime, id_tecnico int(6), observacao varchar(123), data_fechamento datetime, urgencia varchar(20), solucao varchar(200));')
     cursor.execute('ALTER TABLE chamados ADD CONSTRAINT fk_chamados_usuarios FOREIGN KEY (id_usuario) REFERENCES usuarios (id), ADD CONSTRAINT fk_chamados_equipamentos FOREIGN KEY (id_equipamento) REFERENCES equipamentos (id)')
 
     cnx.commit()
     cnx.close()
+
+    #APAGARA ISSO DEPOIS, POPULANDO TABELAS POR TESTE
+    try:
+        cnx = mysql.connector.connect(
+            host='127.0.0.1',
+            user='root',
+            password='',
+            database='chamadosti'
+        )
+        cursor = cnx.cursor()
+
+        # Populando tabela de usuários
+        add_usuario = ("INSERT INTO usuarios "
+                    "(nome, email, senha, perfil, cargo, status, justificativa, data_just_ini, data_just_fin) "
+                    "VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)")
+        usuario_data = [
+            ('1', '1', '1', 'tecnico', 'Técnico de Manutenção', 'ativo', None, None, None),
+            ('Técnico Fulano', 'fulano@example.com', 'senha123', 'tecnico', 'Técnico de Manutenção', 'ativo', None, None, None),
+            ('Usuário Ciclano', 'ciclano@example.com', 'senha456', 'usuario', 'Usuário Comum', 'ativo', None, None, None)
+        ]
+        cursor.executemany(add_usuario, usuario_data)
+
+        # Commit das alterações na tabela de usuários
+        cnx.commit()
+
+    except mysql.connector.Error as err:
+        print(err)
+        # Trate o erro conforme necessário
+
+    finally:
+        # Feche o cursor e a conexão
+        cursor.close()
+        cnx.close()
+
+
+    try:
+        cnx = mysql.connector.connect(
+            host='127.0.0.1',
+            user='root',
+            password='',
+            database='chamadosti'
+        )
+        cursor = cnx.cursor()
+
+        # Populando tabela de setores
+        add_setor = ("INSERT INTO setores "
+                    "(nome) "
+                    "VALUES (%s)")
+        setor_data = [
+            ('Manutenção',),
+            ('Suporte',),
+            ('Administração',)
+        ]
+        cursor.executemany(add_setor, setor_data)
+
+        # Commit das alterações na tabela de setores
+        cnx.commit()
+
+    except mysql.connector.Error as err:
+        print(err)
+        # Trate o erro conforme necessário
+
+    finally:
+        # Feche o cursor e a conexão
+        cursor.close()
+        cnx.close()
+
+
+    try:
+        cnx = mysql.connector.connect(
+            host='127.0.0.1',
+            user='root',
+            password='',
+            database='chamadosti'
+        )
+        cursor = cnx.cursor()
+
+        # Populando tabela de equipamentos
+        add_equipamento = ("INSERT INTO equipamentos "
+                        "(nome, id_setor, marca, conservacao, status, justificativa, data_cadastro) "
+                        "VALUES (%s, %s, %s, %s, %s, %s, %s)")
+        equipamento_data = [
+            ('Computador', 1, 'Dell', 'Bom estado', 'ativo', None, '2024-02-21 10:00:00'),
+            ('Impressora', 1, 'HP', 'Precisa de manutenção', 'inativo', 'Quebrada', '2024-02-21 11:00:00'),
+            ('Telefone', 2, 'Panasonic', 'Ótimo estado', 'ativo', None, '2024-02-21 12:00:00')
+        ]
+        cursor.executemany(add_equipamento, equipamento_data)
+
+        # Commit das alterações na tabela de equipamentos
+        cnx.commit()
+
+    except mysql.connector.Error as err:
+        print(err)
+        # Trate o erro conforme necessário
+
+    finally:
+        # Feche o cursor e a conexão
+        cursor.close()
+        cnx.close()
+
+
+    try:
+        cnx = mysql.connector.connect(
+            host='127.0.0.1',
+            user='root',
+            password='',
+            database='chamadosti'
+        )
+        cursor = cnx.cursor()
+
+        # Populando tabela de chamados
+        add_chamado = ("INSERT INTO chamados "
+                    "(id_usuario, id_equipamento, descricao, id_setor, data_abertura, id_tecnico, observacao, urgencia, solucao) "
+                    "VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)")
+        chamado_data = [
+            (1, 1, 'Computador lento', 1, '2024-02-21 13:00:00', 1, 'N/A', 'baixa', 'Limpeza realizada'),
+            (2, 2, 'Impressora não imprime', 1, '2024-02-21 14:00:00', None, 'Toner acabou', 'alta', 'Substituído toner'),
+            (2, 3, 'Telefone com chiado', 2, '2024-02-21 15:00:00', None, 'Problema de linha', 'média', 'Verificada linha telefônica')
+        ]
+        cursor.executemany(add_chamado, chamado_data)
+
+        # Commit das alterações na tabela de chamados
+        cnx.commit()
+
+    except mysql.connector.Error as err:
+        print(err)
+        # Trate o erro conforme necessário
+
+    finally:
+        # Feche o cursor e a conexão
+        cursor.close()
+        cnx.close()
+
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'TESTE'
 
@@ -306,6 +440,40 @@ def pagina_cadastro_chamado():
     cursor.close()
     cnx.close()
     return render_template('cadastro_chamado.html', setores=setores)
+
+@app.route('/status_usuario/<id>', methods=['GET', 'POST'])
+def status_usuario(id):
+    if not session.get('usuario_id'):
+        return redirect(url_for('pagina_login'))
+    if session.get('perfil') != 'tecnico':
+        return redirect(url_for('pagina_inicial'))
+    if not id.isdigit:
+        return render_template('status_usuario', error='ID inválido')
+    try:
+        cnx = mysql.connector.connect(
+            host='127.0.0.1',
+            user='root',
+            password='',
+            database='chamadosti'
+        )
+        cursor = cnx.cursor()
+        cursor.execute('SELECT * FROM usuarios WHERE id = %s;', (id,))
+        usuario = cursor.fetchone()
+        if usuario[6] == "ativo" or usuario[6] == "None":
+            cursor.execute('UPDATE usuarios SET status = %s WHERE id = %s', ('inativo', id))
+            cursor.execute('INSERT INTO status (id_usuario, status, date_modificacao) VALUES (%s, %s, NOW())', (id, 'inativo'))
+        else:
+            cursor.execute('UPDATE usuarios SET status = %s WHERE id = %s', ('ativo', id))
+            cursor.execute('INSERT INTO status (id_usuario, status, date_modificacao) VALUES (%s, %s, NOW())', (id, 'ativo'))
+        cursor.close()
+        cnx.commit()
+        if usuario[4] == "tecnico":
+            return redirect(url_for('pagina_tecnicos'))
+        else:
+            return redirect(url_for('pagina_usuarios'))
+    except mysql.connector.Error as e:
+        return render_template('excluir-usuario.html', error=str(e))
+
 
 
 @app.route('/excluir_usuario/<id>', methods=['GET', 'POST'])
@@ -658,13 +826,16 @@ def login():
     cursor.close()
     cnx.close()
     if usuario:
-        session['usuario_id'] = usuario[0]
-        session['perfil'] = usuario[4]
-        return redirect(url_for('pagina_usuarios'))
+        if usuario[6] != "ativo":
+            return redirect(url_for('pagina_login'))
+        else:
+            session['usuario_id'] = usuario[0]
+            session['perfil'] = usuario[4]
+            return redirect(url_for('pagina_usuarios'))
     else:
-        # Login inválido
         return redirect(url_for('pagina_login'))
+        
 
 
 if __name__ == '__main__':
-    app.run(debug=True)
+        app.run(debug=True)
