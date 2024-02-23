@@ -20,6 +20,7 @@ Chamados TI
       <th>Técnico</th>
       <th>Observação</th>
       <th>Data Fechamento</th>
+      <th>Urgência</th>
       <th>Solução</th>
       <th>Ações</th>
     </tr>
@@ -51,6 +52,11 @@ Chamados TI
       <td>{{""}}</td>
       {%else %}
       <td>{{ chamado[9] }}</td>
+      {% endif %}
+      {% if chamado[10] == None %}
+      <td>{{""}}</td>
+      {%else %}
+      <td>{{ chamado[10] }}</td>
       {% endif %}
       <td>
         <a href="/editarchamado/{{ chamado[0]}}" class="editar">Editar</a>
