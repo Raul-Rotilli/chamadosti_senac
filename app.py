@@ -191,7 +191,7 @@ def pagina_inicial():
     return render_template('paginainicial.html')
 
 
-@app.route('/chamados')
+@app.route('/chamados', methods=['POST', 'GET'],)
 def pagina_chamados():
     if not session.get('usuario_id'):
         return redirect(url_for('pagina_login'))
@@ -202,13 +202,64 @@ def pagina_chamados():
         database='chamadosti'
     )
     cursor = cnx.cursor()
-    if session.get('perfil') == 'tecnico':
-        cursor.execute('Select * from chamados')
-        chamados = cursor.fetchall()
+    if request.method == 'POST':
+        if request.form['filtro'] == "fechados":
+            if session.get('perfil') == 'tecnico':
+                cursor.execute('Select * from chamados WHERE data_fechamento IS NOT NULL ORDER BY data_fechamento DESC')
+                chamados = cursor.fetchall()
+            else:
+                cursor.execute('Select * from chamados WHERE id_usuario = %s AND data_fechamento IS NOT NULL ORDER BY data_fechamento DESC',
+                            (session.get('usuario_id'),))
+                chamados = cursor.fetchall()
+        if request.form['filtro'] == "abertos":
+            if session.get('perfil') == 'tecnico':
+                if session.get('perfil') == 'tecnico':
+                    cursor.execute('Select * from chamados WHERE data_fechamento IS NULL')
+                    chamados = cursor.fetchall()
+            else:
+                cursor.execute('Select * from chamados WHERE id_usuario = %s AND data_fechamento IS NULL',
+                            (session.get('usuario_id'),))
+                chamados = cursor.fetchall()
+        if request.form['filtro'] == "fechamento_desc":
+            if session.get('perfil') == 'tecnico':
+                cursor.execute('Select * from chamados WHERE data_fechamento IS NOT NULL ORDER BY data_fechamento DESC')
+                chamados = cursor.fetchall()
+            else:
+                cursor.execute('Select * from chamados WHERE id_usuario = %s AND data_fechamento IS NOT NULL ORDER BY data_fechamento DESC',
+                            (session.get('usuario_id'),))
+                chamados = cursor.fetchall()
+        if request.form['filtro'] == "fechamento_crec":
+            if session.get('perfil') == 'tecnico':
+                cursor.execute('Select * from chamados WHERE data_fechamento IS NOT NULL ORDER BY data_fechamento')
+                chamados = cursor.fetchall()
+            else:
+                cursor.execute('Select * from chamados WHERE id_usuario = %s AND data_fechamento IS NOT NULL ORDER BY data_fechamento',
+                            (session.get('usuario_id'),))
+                chamados = cursor.fetchall()
+        if request.form['filtro'] == "abertura_crec":
+            if session.get('perfil') == 'tecnico':
+                cursor.execute('Select * from chamados WHERE data_fechamento IS NULL ORDER BY data_abertura')
+                chamados = cursor.fetchall()
+            else:
+                cursor.execute('Select * from chamados WHERE id_usuario = %s AND data_fechamento IS NULL ORDER BY data_abertura',
+                            (session.get('usuario_id'),))
+                chamados = cursor.fetchall()
+        if request.form['filtro'] == "abertura_desc":
+            if session.get('perfil') == 'tecnico':
+                cursor.execute('Select * from chamados WHERE data_fechamento IS NULL ORDER BY data_abertura DESC')
+                chamados = cursor.fetchall()
+            else:
+                cursor.execute('Select * from chamados WHERE id_usuario = %s AND data_fechamento IS NULL ORDER BY data_abertura DESC',
+                            (session.get('usuario_id'),))
+                chamados = cursor.fetchall()
     else:
-        cursor.execute('Select * from chamados WHERE id_usuario = %s',
-                       (session.get('usuario_id'),))
-        chamados = cursor.fetchall()
+        if session.get('perfil') == 'tecnico':
+            cursor.execute('Select * from chamados WHERE data_fechamento IS NULL')
+            chamados = cursor.fetchall()
+        else:
+            cursor.execute('Select * from chamados WHERE id_usuario = %s AND data_fechamento IS NULL',
+                        (session.get('usuario_id'),))
+            chamados = cursor.fetchall()
     return render_template('chamados.html', chamados=chamados)
 
 
