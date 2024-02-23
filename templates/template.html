@@ -47,6 +47,9 @@
                         {% if session['perfil'] != 'usuario' %}
                         <a class="navbar-brand1" href="{{url_for('pagina_setores')}}">Setores</a>
                         {% endif %}
+                        {% if session['perfil'] != 'usuario' %}
+                        <a class="navbar-brand1" href="{{url_for('pagina_equipamentos')}}">Equipamentos</a>
+                        {% endif %}
                     </div>
                 </li>
                 <div class="navbar-collapse">
