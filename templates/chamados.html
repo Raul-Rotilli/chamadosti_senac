@@ -45,13 +45,13 @@ Chamados TI
             {% else %}
             <th><button type="submit" name="filtro" value="fechamento_crec">Data Fechamento</button></th>
             {% endif %}
-            {% else %}
-            <th>Data Fechamento</th>
             {% endif %}
             {% else %}
+            {% if chamados[0][8] is not none %}
             <th>Data Fechamento</th>
             {% endif %}
-            {% if chamados|length >= 2 and chamados[0][8] is not none %}
+            {% endif %}
+            {% if chamados[0][8] is not none %}
             <th>Solução</th>
             {% endif %}
             <th>Urgencia</th>
@@ -81,12 +81,12 @@ Chamados TI
       {% if chamado[8] != None %}
       <td>{{ chamado[8] }}</td>
       {% endif %}
-      {% if chamado[8] != None %}
-      <td>{{ chamado[8] }}</td>
-      {% endif %}
-      {% if chamado[9] == None %}
+      {% if chamado[10] == None %}
       <td>{{""}}</td>
-      {%else %}
+      {%else%}
+      <td>{{ chamado[10] }}</td>
+      {% endif %}
+      {% if chamado[8] != None %}
       <td>{{ chamado[9] }}</td>
       {% endif %}
       <td>
