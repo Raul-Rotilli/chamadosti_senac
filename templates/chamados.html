@@ -8,21 +8,42 @@ Chamados TI
 {% block conteudo%}
 
 <h2 style="text-align: center; font-size: 25px; font-family: Segoe UI;">Tabela de Chamados</h2>
-
+<form method="post" action="/chamados">
+  {% if chamados[0][8] is none %}
+  <button type="submit" name="filtro" value="fechados">Data Fechamento</button>
+  {% else %}
+  <button type="submit" name="filtro" value="abertos">Data Fechamento</button>
+  {% endif %}
+</form>
 <table>
   <thead>
     <tr>
-      <th>Usuario</th>
-      <th>Equipamento</th>
-      <th>Descrição</th>
-      <th>Setor</th>
-      <th>Data Abertura</th>
-      <th>Técnico</th>
-      <th>Observação</th>
-      <th>Data Fechamento</th>
-      <th>Urgência</th>
-      <th>Solução</th>
-      <th>Ações</th>
+      <form method="post" action="/chamados">
+        <th>Usuario</th>
+        <th>Equipamento</th>
+        <th>Descrição</th>
+        <th>Setor</th>
+        {% if chamados[0][5] < chamados[1][5] %} <th><button type="submit" name="filtro" value="abertura_desc">Data
+            Data Abertura</button></th>
+          {% else %}
+          <th><button type="submit" name="filtro" value="abertura_crec">Data Abertura</button></th>
+          {% endif %}
+          <th>Técnico</th>
+          <th>Observação</th>
+          {% if chamados[0][8] is not none %}
+          {% if chamados[0][8] < chamados[1][8] %} <th><button type="submit" name="filtro" value="fechamento_desc">Data
+              Fechamento</button></th>
+            {% else %}
+            <th><button type="submit" name="filtro" value="fechamento_crec">Data Fechamento</button></th>
+            {% endif %}
+            {% else %}
+            {% endif %}
+            {% if chamados[0][8] is not none %}
+            <th>Solução</th>
+            {% endif %}
+            <th>Urgencia</th>
+            <th>Ações</th>
+      </form>
     </tr>
   </thead>
   <tbody>
@@ -43,9 +64,10 @@ Chamados TI
       {%else %}
       <td>{{ chamado[7] }}</td>
       {% endif %}
-      {% if chamado[8] == None %}
-      <td>{{""}}</td>
-      {%else %}
+      {% if chamado[8] != None %}
+      <td>{{ chamado[8] }}</td>
+      {% endif %}
+      {% if chamado[8] != None %}
       <td>{{ chamado[8] }}</td>
       {% endif %}
       {% if chamado[9] == None %}
@@ -53,22 +75,13 @@ Chamados TI
       {%else %}
       <td>{{ chamado[9] }}</td>
       {% endif %}
-      {% if chamado[10] == None %}
-      <td>{{""}}</td>
-      {%else %}
-      <td>{{ chamado[10] }}</td>
-      {% endif %}
       <td>
         <a href="/editarchamado/{{ chamado[0]}}" class="editar">Editar</a>
-      </td>
-      <td>
         {% if chamado[6] == None %}
         <a href="/atender_chamado/{{ chamado[0]}}" class="atender">Atender</button>
           {% elif chamado[8] == None %}
           <a href="/finalizarchamado/{{ chamado[0]}}" class="atender">Finalizar</button>
-            {% else %}
-            <h1>Fechado</h1>
-            {% endif %}
+          {% endif %}
 
       </td>
     </tr>
