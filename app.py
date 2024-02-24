@@ -202,6 +202,7 @@ def pagina_chamados():
         database='chamadosti'
     )
     cursor = cnx.cursor()
+    
     if request.method == 'POST':
         if request.form['filtro'] == "fechados":
             if session.get('perfil') == 'tecnico':
@@ -260,7 +261,7 @@ def pagina_chamados():
             cursor.execute('Select * from chamados WHERE id_usuario = %s AND data_fechamento IS NULL',
                         (session.get('usuario_id'),))
             chamados = cursor.fetchall()
-    return render_template('chamados.html', chamados=chamados)
+    return render_template('chamados.html', chamados=chamados, perfil=session.get('perfil'))
 
 
 @app.route('/usuarios')
@@ -284,7 +285,7 @@ def pagina_usuarios():
         cursor.execute('SELECT * FROM usuarios WHERE id = %s',
                        (session.get('usuario_id'),))
         usuarios = cursor.fetchall()
-        return render_template("usuarios.html", usuarios=usuarios)
+        return render_template("user.html", usuarios=usuarios)
 
 
 @app.route('/tecnicos')
@@ -337,7 +338,7 @@ def pagina_equipamentos():
     cursor = cnx.cursor()
     cursor.execute('SELECT * FROM equipamentos')
     equipamentos = cursor.fetchall()
-    return render_template("setores.html", equipamentos=equipamentos)
+    return render_template("equipamentos.html", equipamentos=equipamentos)
 
 
 @app.route('/cadastro_usuario', methods=['POST', 'GET'],)
@@ -637,7 +638,7 @@ def status_equipamento(id):
                 cursor.execute('INSERT INTO status (id_equipamento, status, date_modificacao) VALUES (%s, %s, NOW())', (id, 'inativo'))
                 cursor.close()
                 cnx.commit()
-                return redirect(url_for('pagina_inicial'))
+                return redirect(url_for('pagina_equipamentos'))
 
             else:
                 conservacao = request.form.get('conservacao')
@@ -645,7 +646,7 @@ def status_equipamento(id):
                 cursor.execute('INSERT INTO status (id_equipamento, status, date_modificacao) VALUES (%s, %s, NOW())', (id, 'ativo'))
                 cursor.close()
                 cnx.commit()
-                return redirect(url_for('pagina_inicial'))
+                return redirect(url_for('pagina_equipamentos'))
     else:
         return render_template('status_equipamento.html', equipamento=equipamento)
     
@@ -958,7 +959,7 @@ def atualizarequipamento(id):
             return render_template('paginainicial.html')
             # Redireciona para a página inicial
 
-    return render_template('editarchamado.html', id=id, chamado=dados_chamado)
+    return render_template('editarequipamento.html', id=id, chamado=dados_chamado)
 
 @app.route('/atender_chamado/<id>', methods=['POST', 'GET'])
 def atender_chamado(id):
