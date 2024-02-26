@@ -1,0 +1,111 @@
+{% extends "template.html" %}
+{%block titulo%}
+Chamados TI
+{%endblock%}
+{% block cadastro %}
+<a class="nav-link" href="{{url_for('cadastro_chamado')}}">Cadastro</a>
+{% endblock %}
+{% block conteudo%}
+
+<h2 style="text-align: center; font-size: 25px; font-family: Segoe UI;">Tabela de Chamados</h2>
+<form method="post" action="/chamados">
+  {% if chamados|length >= 1 %}
+  {% if chamados[0][8] is none %}
+  <button type="submit" name="filtro" value="fechados">Data Fechamento</button>
+  {% else %}
+  <button type="submit" name="filtro" value="abertos">Data Fechamento</button>
+  {% endif %}
+  {%else%}
+  <button type="submit" name="filtro" value="fechados">Data Fechamento</button>
+  {% endif %}
+</form>
+<table>
+  <thead>
+    <tr>
+      <form method="post" action="/chamados">
+        <th>Usuario</th>
+        <th>Equipamento</th>
+        <th>Descrição</th>
+        <th>Setor</th>
+        {% if chamados|length >= 2 %}
+        {% if chamados[0][5] < chamados[1][5] %} <th><button type="submit" name="filtro" value="abertura_desc">Data
+            Abertura</button></th>
+          {% else %}
+          <th><button type="submit" name="filtro" value="abertura_crec">Data Abertura</button></th>
+          {% endif %}
+          {% else %}
+          <th>Data Abertura</th>
+          {% endif %}
+          <th>Técnico</th>
+          <th>Observação</th>
+          {% if chamados|length >= 2 %}
+          {% if chamados[0][8] is not none %}
+          {% if chamados[0][8] < chamados[1][8] %} <th><button type="submit" name="filtro" value="fechamento_desc">Data
+              Fechamento</button></th>
+            {% else %}
+            <th><button type="submit" name="filtro" value="fechamento_crec">Data Fechamento</button></th>
+            {% endif %}
+            {% endif %}
+            {% else %}
+            {% if chamados[0][8] is not none %}
+            <th>Data Fechamento</th>
+            {% endif %}
+            {% endif %}
+            {% if chamados[0][8] is not none %}
+            <th>Solução</th>
+            {% endif %}
+            <th>Urgencia</th>
+            <th>Ações</th>
+      </form>
+
+    </tr>
+  </thead>
+  <tbody>
+    {% for chamado in chamados %}
+    <tr>
+      <td>{{ chamado[1] }}</td>
+      <td>{{ chamado[2] }}</td>
+      <td>{{ chamado[3] }}</td>
+      <td>{{ chamado[4] }}</td>
+      <td>{{ chamado[5] }}</td>
+      {% if chamado[6] == None %}
+      <td>{{""}}</td>
+      {%else %}
+      <td>{{ chamado[6] }}</td>
+      {% endif %}
+      {% if chamado[7] == None %}
+      <td>{{""}}</td>
+      {%else %}
+      <td>{{ chamado[7] }}</td>
+      {% endif %}
+      {% if chamado[8] != None %}
+      <td>{{ chamado[8] }}</td>
+      {% endif %}
+      {% if chamado[10] == None %}
+      <td>{{""}}</td>
+      {%else%}
+      <td>{{ chamado[10] }}</td>
+      {% endif %}
+      {% if chamado[8] != None %}
+      <td>{{ chamado[9] }}</td>
+      {% endif %}
+      <td>
+        <a href="/editarchamado/{{ chamado[0]}}" class="editar">Editar</a>
+        {% if chamado[6] == None %}
+        <a href="/atender_chamado/{{ chamado[0]}}" class="atender">Atender</button>
+          {% elif chamado[8] == None %}
+          <a href="/finalizarchamado/{{ chamado[0]}}" class="atender">Finalizar</button>
+            {% endif %}
+
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+<div class="divimg">
+  <img class="imgpython" src="{{url_for('static', filename='giphy.gif')}}">
+  <!--Cria uma imagem.-->
+</div>
+<!--A expressão {{chamados}} é uma instrução Jinja que é usada para inserir os dados da variável chamados no template HTML.-->
+
+{%endblock%}

@@ -1,0 +1,39 @@
+{% extends 'template.html' %}
+
+{% block titulo %}
+Mudar Status Do Equipamento
+{% endblock %}
+
+{% block conteudo %}
+
+<body style="text-align: center;  font-family: Segoe UI;">
+    <div>
+        <img class="imgpython" src="{{url_for('static', filename='giphy.gif')}}">
+        <h1 style="text-align: center; font-size: 25px; font-family: Segoe UI;">
+            Mudar Status Do Equipamento
+        </h1>
+
+        <div id="error-alert" class="alert alert-danger" role="alert" style="display: none;">
+            <strong>Erro:</strong> {{ error }}
+        </div>
+
+        <form method="POST" action="/status_equipamento/{{equipamento[0]}}">
+            {% if equipamento[5] == 'ativo' %}
+            <div>
+                <input style="margin: 5px" class="inputlogin" type="text" name="justificativa" id="justificativa"
+                    placeholder="Justificativa">
+            </div>
+            {% endif %}
+            <div>
+                <input style="margin: 5px" class="inputlogin" type="text" name="conservacao" id="conservacao"
+                    placeholder="Conservação">
+            </div>
+
+            <br>
+            <button class="botaologin" type="submit">Cadastrar</button>
+        </form>
+    </div>
+
+
+</body>
+{% endblock %}

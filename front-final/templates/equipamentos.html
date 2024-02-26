@@ -1,0 +1,69 @@
+{% extends "template.html" %}
+{%block titulo%}
+Equipamentos
+{%endblock%}
+
+{% block cadastro %}
+<a class="nav-link" href="{{url_for('cadastro_equipamento')}}">Cadastro</a>
+{% endblock %}
+{% block conteudo%}
+
+<h2 style="text-align: center; font-size: 25px; font-family: Segoe UI;">Equipamentos</h2>
+
+<table style="margin:0 13.5%; width: 75%;">
+    <thead>
+        <tr>
+            <th>Nome</th>
+            <th>Setor</th>
+            <th>Marca</th>
+            <th>Conservação</th>
+            <!--<th>Status</th>-->
+            <!--<th>Justificativa</th>-->
+            <!--<th>Data Cadastro</th>-->
+            <th>Ação</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        {% for equipamento in equipamentos %}
+        <tr>
+            <td>{{ equipamento[1] }}</td>
+            <td>{{ equipamento[2] }}</td>
+            <td>{{ equipamento[3] }}</td>
+            <td>{{ equipamento[4] }}</td>
+            <td>
+               <button class="excluir" onclick="confirmar( {{equipamento[0]}})" > Excluir</button>
+                <a href="/editarusuario/{{ equipamento[0]}}" class="editar">Editar</a>
+
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+<div class="divimg">
+    <img class="imgpython" src="{{url_for('static', filename='giphy.gif')}}">
+</div>
+
+
+
+
+<script>
+
+    function confirmar(usuario)
+
+    {
+    var confirmacao = confirm('Tem certeza que quer excluir o usuario?')
+    console.log(confirmacao)
+    if (confirmacao){
+        window.location.href = "/excluir_usuario/"+usuario
+    }
+    }
+
+</script>
+
+
+
+
+
+
+{%endblock%}
