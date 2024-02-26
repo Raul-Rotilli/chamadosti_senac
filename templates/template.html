@@ -3,61 +3,84 @@
 
 <head>
     <meta charset="UTF-8">
-
     <meta http-equiv="X-UA-Compatibile" content="IE=edge">
-
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <link rel="stylesheet" href="{{url_for('static', filename='style.css')}}">
+    <link rel="stylesheet" href="{{url_for('static', filename='reset.css')}}">
     <link rel="shortcut icon" href="{{url_for('static', filename='favicon.ico')}}"/>
-    <!--bootstrap--> 
-   <!--bootstrap--> 
-
-
-
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 
     <title>
         {% block titulo %}
         {% endblock %}
-
     </title>
-    <!--Define o título da página.-->
 </head>
 
 <body>
-    <nav class="navbar">
-        <!--Cria uma barra de navegação.-->
-        <div class="container-template">
-            <!---->
-            <div class="container-template">
-
-                <img class="navbar-brand" src="{{url_for('static', filename='do-utilizador.png')}}">
-                <!---->
-                <a class="navbar-brand" href="#">Chamados TI</a>
-                <!--Cria um link para a página inicial.-->
-                <a class="navbar-brand1" href="{{url_for('pagina_inicial')}}">Página Inicial</a>
-                <li class="dropdown">
-                    <a class="dropbtn" href="#">Tabelas</a>
-                    <div class="dropdown-content">
-                        <a class="navbar-brand1" href="{{url_for('pagina_usuarios')}}">Usuários</a>
-                        {% if session['perfil'] != 'usuario' %}
-                        <a class="navbar-brand1" href="{{url_for('pagina_tecnicos')}}">Técnicos</a>
-                        {% endif %}
-                        <a class="navbar-brand1" href="{{url_for('pagina_chamados')}}">Chamados</a>
-                        {% if session['perfil'] != 'usuario' %}
-                        <a class="navbar-brand1" href="{{url_for('pagina_setores')}}">Setores</a>
-                        {% endif %}
-                        {% if session['perfil'] != 'usuario' %}
-                        <a class="navbar-brand1" href="{{url_for('pagina_equipamentos')}}">Equipamentos</a>
-                        {% endif %}
-                    </div>
-                </li>
-                <div class="navbar-collapse">
-                    <!---->
-                </div>
-                <!---->
+    <div class="container-template">
+        <nav class="menulateral">
+            <div class="btnexpandir">
+                <i class="bi bi-list" id="btnexp"></i>
             </div>
-            <!---->
+            <ul>
+                <li class="item-menu ativo">
+                    <a href="{{url_for('pagina_inicial')}}">
+                        <span class="icon">
+                            <i class="bi bi-house"></i>
+                        </span>
+                        <span class="txt-link">Home</span>
+                    </a>
+                </li>
+                <li class="item-menu">
+                    <a href="{{url_for('pagina_usuarios')}}">
+                        <span class="icon">
+                            <i class="bi bi-person"></i>
+                        </span>
+                        <span class="txt-link">Usuários</span>
+                    </a>
+                </li>
+                {% if session['perfil'] != 'usuario' %}
+                <li class="item-menu">
+                    <a href="{{url_for('pagina_tecnicos')}}">
+                        <span class="icon">
+                            <i class="bi bi-people"></i>
+                        </span>
+                        <span class="txt-link">Técnicos</span>
+                    </a>
+                </li>
+                {% endif %}
+                <li class="item-menu">
+                    <a href="{{url_for('pagina_chamados')}}">
+                        <span class="icon">
+                            <i class="bi bi-megaphone"></i>
+                        </span>
+                        <span class="txt-link">Chamados</span>
+                    </a>
+                </li>
+                {% if session['perfil'] != 'usuario' %}
+                <li class="item-menu">
+                    <a href="{{url_for('pagina_setores')}}">
+                        <span class="icon">
+                            <i class="bi bi-diagram-2"></i>
+                        </span>
+                        <span class="txt-link">Setores</span>
+                    </a>
+                </li>
+                {% endif %}
+                {% if session['perfil'] != 'usuario' %}
+                <li class="item-menu">
+                    <a href="{{url_for('pagina_equipamentos')}}">
+                        <span class="icon">
+                            <i class="bi bi-pc-display"></i>
+                        </span>
+                        <span class="txt-link">Equipamentos</span>
+                    </a>
+                </li>
+                {% endif %}
+            </ul>
+            <div class="navbar-collapse">
+                
+            </div>
             <div class="navbar-nav">
                 <!---->
                 <a class="nav-link" href="{{url_for('pagina_login')}}">Sair</a>
@@ -65,13 +88,14 @@
                 {% block cadastro %}
                 {% endblock %}
             </div>
-        </div>
-        </div>
-    </nav>
-    {%block conteudo%}
+        </nav>
+        {%block conteudo%}
 
-    {% endblock %}
+        {% endblock %}
+        
 
+    <script src="{{url_for('static', filename='menu.js')}}"></script>
+    
 </body>
 
 </html>
