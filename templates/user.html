@@ -1,0 +1,60 @@
+{% extends 'template.html' %}
+{% block titulo %}
+
+Formulário de Cadastro de Setor
+
+{% endblock %}
+
+{% block cadastro %}
+
+{%endblock%}
+
+{% block conteudo %}
+
+{% for usuario in usuarios %}
+
+        
+
+        
+
+
+
+<h2 style="text-align: center; font-size: 25px; font-family: Segoe UI; color: #01498C; padding-top: 220px;">{{ usuario[1] }}</h2>
+<div class="divimg">
+
+    <img class="imgpython" src="{{url_for('static', filename='gifdouser.gif')}}">
+
+</div>
+<div style="display:flex; justify-content:center; width:100%;"> 
+
+      
+
+       <strong style="padding-right: 10px; color: #01498C;">E-mail:</strong>{{ usuario[2] }} 
+
+</div>
+
+
+
+<div style="display:flex; justify-content:center; width:100%; padding-top: 17px;"> 
+
+        <strong style="padding-right: 10px; color: #01498C;">Cargo:</strong>{{ session['perfil'] }} 
+
+</div>  
+
+</div>
+
+<div style="display:flex; padding-top: 20px; justify-content:center;">
+
+    <a href="/editarusuario/{{ usuario[0]}}" class="editar">Editar</a>
+
+</div>
+
+{% endfor %}
+
+<div class="divimg">
+
+    <img class="imgpython" src="{{url_for('static', filename='giphy.gif')}}">
+
+</div>
+
+{% endblock %}

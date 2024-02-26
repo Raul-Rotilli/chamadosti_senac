@@ -4,13 +4,20 @@ Equipamentos
 {%endblock%}
 
 {% block cadastro %}
-<a class="nav-link" href="{{url_for('cadastro_equipamento')}}">Cadastro</a>
+<li class="item-menu">
+  <a href="{{url_for('cadastro_equipamento')}}">
+      <span class="icon">
+          <i class="bi bi-plus"></i>
+      </span>
+      <span class="txt-link">Equipamentos</span>
+  </a>
+</li>
 {% endblock %}
 {% block conteudo%}
 
 <h2 style="text-align: center; font-size: 25px; font-family: Segoe UI;">Equipamentos</h2>
 
-<table style="margin:0 13.5%; width: 75%;">
+<table class="table-direita" style="margin:0 13.5%; width: 75%;">
     <thead>
         <tr>
             <th>Nome</th>

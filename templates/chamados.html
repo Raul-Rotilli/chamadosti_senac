@@ -3,12 +3,19 @@
 Chamados TI
 {%endblock%}
 {% block cadastro %}
-<a class="nav-link" href="{{url_for('cadastro_chamado')}}">Cadastro</a>
+<li class="item-menu">
+  <a href="{{url_for('cadastro_chamado')}}">
+      <span class="icon">
+          <i class="bi bi-plus"></i>
+      </span>
+      <span class="txt-link">Equipamentos</span>
+  </a>
+</li>
 {% endblock %}
 {% block conteudo%}
 
 <h2 style="text-align: center; font-size: 25px; font-family: Segoe UI;">Tabela de Chamados</h2>
-<form method="post" action="/chamados">
+<form class="table-direita" method="post" action="/chamados">
   {% if chamados|length >= 1 %}
   {% if chamados[0][8] is none %}
   <button type="submit" name="filtro" value="fechados">Data Fechamento</button>
@@ -19,7 +26,7 @@ Chamados TI
   <button type="submit" name="filtro" value="fechados">Data Fechamento</button>
   {% endif %}
 </form>
-<table>
+<table class="table-direita">
   <thead>
     <tr>
       <form method="post" action="/chamados">
@@ -39,7 +46,8 @@ Chamados TI
           <th>Técnico</th>
           <th>Observação</th>
           {% if chamados|length >= 2 %}
-          {% if chamados[0][8] is not none %}
+          {% if chamados and chamados[0][8] is not none %}
+
           {% if chamados[0][8] < chamados[1][8] %} <th><button type="submit" name="filtro" value="fechamento_desc">Data
               Fechamento</button></th>
             {% else %}
@@ -47,11 +55,12 @@ Chamados TI
             {% endif %}
             {% endif %}
             {% else %}
-            {% if chamados[0][8] is not none %}
+            {% if chamados and chamados[0][8] is not none %}
             <th>Data Fechamento</th>
             {% endif %}
             {% endif %}
-            {% if chamados[0][8] is not none %}
+            {% if chamados and chamados[0][8] is not none %}
+
             <th>Solução</th>
             {% endif %}
             <th>Urgencia</th>
@@ -107,5 +116,5 @@ Chamados TI
   <!--Cria uma imagem.-->
 </div>
 <!--A expressão {{chamados}} é uma instrução Jinja que é usada para inserir os dados da variável chamados no template HTML.-->
-
+<script src="{{url_for('static', filename='menu.js')}}"></script>
 {%endblock%}

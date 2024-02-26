@@ -4,7 +4,14 @@ Usuários TI
 {%endblock%}
 
 {% block cadastro %}
-<a class="nav-link" href="{{url_for('cadastro_usuario')}}">Cadastro</a>
+<li class="item-menu">
+  <a href="{{url_for('cadastro_usuario')}}">
+      <span class="icon">
+          <i class="bi bi-plus"></i>
+      </span>
+      <span class="txt-link">Equipamentos</span>
+  </a>
+</li>
 {% endblock %}
 {% block conteudo%}
 
@@ -17,6 +24,7 @@ Usuários TI
             <th>Email</th>
             <th>Cargo</th>
             <th>Ações</th>
+            <th>Status</th>
         </tr>
     </thead>
 
@@ -26,7 +34,10 @@ Usuários TI
             <td>{{ usuario[1] }}</td>
             <td>{{ usuario[2] }}</td>
             <td>{{ usuario[4] }}</td>
+            <td>{{ usuario[6] }}</td>
             <td>
+                
+                <a href="/status_usuario/{{ usuario[0]}}" class="editar">ON/OFF</a>
                <button class="excluir" onclick="confirmar( {{usuario[0]}})" > Excluir</button>
                 <a href="/editarusuario/{{ usuario[0]}}" class="editar">Editar</a>
 

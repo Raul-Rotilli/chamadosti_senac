@@ -3,12 +3,19 @@
 Técnicos TI
 {%endblock%}
 {% block cadastro %}
-<a class="nav-link" href="{{url_for('cadastro_usuario')}}">Cadastro</a>
+<li class="item-menu">
+  <a href="{{url_for('cadastro_usuario')}}">
+      <span class="icon">
+          <i class="bi bi-plus"></i>
+      </span>
+      <span class="txt-link">Equipamentos</span>
+  </a>
+</li>
 {% endblock %}
 {% block conteudo%}
 <h2 style="text-align: center; font-size: 25px; font-family: Segoe UI;">Técnicos</h2>
 
-<table>
+<table class="table-direita">
     <thead>
         <tr>
             <th>Nome</th>

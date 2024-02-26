@@ -164,6 +164,7 @@ else:
         chamado_data = [
             (1, 1, 'Computador lento', 1, '2024-02-21 13:00:00', 1, 'N/A', 'baixa', 'Limpeza realizada'),
             (2, 2, 'Impressora não imprime', 1, '2024-02-21 14:00:00', None, 'Toner acabou', 'alta', 'Substituído toner'),
+            (2, 2, 'Impressora não imprime', 1, '2024-02-21 14:00:00', None, 'Toner acabou', 'alta', 'Substituído toner'),
             (2, 3, 'Telefone com chiado', 2, '2024-02-21 15:00:00', None, 'Problema de linha', 'média', 'Verificada linha telefônica')
         ]
         cursor.executemany(add_chamado, chamado_data)
@@ -343,10 +344,6 @@ def pagina_equipamentos():
 
 @app.route('/cadastro_usuario', methods=['POST', 'GET'],)
 def cadastro_usuario():
-    if not session.get('usuario_id'):
-        return redirect(url_for('pagina_login'))
-    if session.get('perfil') != 'tecnico':
-        return redirect(url_for('pagina_inicial'))
     nome = request.form.get('nome')
     email = request.form.get('email')
     senha = request.form.get('senha')
@@ -388,7 +385,7 @@ def cadastro_usuario():
             )
             cursor = cnx.cursor()
 
-            sql = 'INSERT INTO usuarios (nome, email, senha, perfil) values (%s, %s, %s, %s)'
+            sql = 'INSERT INTO usuarios (nome, email, senha, perfil, status) values (%s, %s, %s, %s, "inativo")'
             values = (nome, email, senha, perfil)
 
             cursor.execute(sql, list(values))
