@@ -10,6 +10,7 @@ body {
   font-family: sans-serif;
   /* Define fonte padrão */
   background-color: #e7e7e9;
+  text-decoration: none;
 }
 
 /* Navbar */
@@ -129,15 +130,88 @@ background: linear-gradient(90deg, rgba(246,140,31,1) 0%, rgba(255,255,255,1) 35
 
 }
 
+/*pagina inicial*/
+logincodigos
+body{
+    height: 400vh  ;
+}
+nav.menulateral{
+    width: 64px;
+    height: 100%;
+    background-color: #01498C;
+    padding: 40px 0 40px 1%;
+    box-shadow: 4px 0 0 #fd7e14;
+    position: fixed;
+    top: 0;
+    left: 0;
+    overflow: hidden;
+    transition: 0.4s;
+}
+nav.menulateral.expandir{
+    width: 240px;
+}
+.btnexpandir{
+    width: 100%;
+    padding-left: 8px;
+}
 
-
+.btnexpandir i{
+    color: #fff;
+    font-size: 24px;
+    cursor: pointer;
+}
+ul{
+    height: 100%;
+}
+ul li.item-menu:hover{
+    background: #fd7e14;
+    border-radius: 8px;
+}
+ul li.item-menu{
+    transition: 0.4s;
+    margin-top: 8px;
+}
+ul li.active{
+    background-color: #fd7e14;
+    border-radius: 8px 0 0 8px;
+}
+ul li.item-menu a{
+    color: #fff;
+    font-size: 20px;
+    padding: 20px 4%;
+    display: flex;
+    margin-bottom: 20px;
+    line-height: 40px;
+    text-decoration: none;
+}
+ul li.item-menu a .txt-link{
+    margin-left: 72px;
+    transition: 1.26s;
+    opacity: 0;
+}
+nav.menulateral.expandir .txt-link{
+    margin-left: 32px;
+    opacity: 2;
+}
+ul li.item-menu a .icon i{
+    font-size: 24px;
+    margin-left: 8px;
+}
 
 
 h2 {
-  margin-top: 0px;
+  
+  padding-top: 16px;
   /* Remove margem superior */
 }
 
+.titulo-tabela{
+  padding: 16px;
+}
+
+.itens-tabela{
+  font-weight: bold;
+}
 .divimg {
   text-align: center;
   /* Centraliza o conteúdo */
@@ -151,6 +225,10 @@ h2 {
   /* Altura da imagem */
 }
 
+.table-direita {
+  margin-left: 64px; /* ou qualquer valor que desejar */
+}
+
 table {
   width: 100%;
   /*Define a largura da tabela para ocupar o espaço total disponível.*/
@@ -160,6 +238,7 @@ table {
   /*Adiciona uma linha horizontal sólida de 1px de espessura na cor #ddd (cinza claro) na parte superior da tabela.*/
   border-bottom: 1px solid #ddd;
   /*Adiciona uma linha horizontal sólida de 1px de espessura na cor #ddd na parte inferior da tabela*/
+  
 }
 
 th,
@@ -178,6 +257,8 @@ th {
   /*Torna o texto das células do cabeçalho (th) negrito.*/
   border-bottom: 2px solid #ddd;
   /*Adiciona uma linha horizontal sólida de 2px de espessura na cor #ddd na parte inferior das células do cabeçalho.*/
+  
+  
 }
 
 td {
@@ -225,7 +306,7 @@ button {
 
 .text{
   padding-left: 25px;
-  color: snow;
+  color: rgb(67,65,65);
   font-size: 2em;
   letter-spacing: 10px;
   font-family: monospace;
