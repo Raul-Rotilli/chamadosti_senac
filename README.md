@@ -27,7 +27,8 @@ Para instalar as dependências do projeto, execute o seguinte comando:
 pip install [nome da dependência]
 Por exemplo, para instalar o Flask, execute o seguinte comando:
 pip install flask
-5.	Execute a aplicação.
+5. Deixar o banco de dados online
+6.	Execute a aplicação.
 Para executar a aplicação, execute o seguinte comando:
 flask --app nomedoapp run --debug
 
@@ -59,6 +60,8 @@ O processo de desenvolvimento do projeto foi tanto divertido quanto desafiador, 
         <td align="center">
         <a href="https://www.linkedin.com/in/gabriel-nunes-87242a278/">Gabriel Fortunato Nunes</a>
         </td>
+    </tr>
+    <tr>
         <td align="center">
         <a href="https://www.linkedin.com/in/gabriela-kleinschmitt/">Gabriela Kleinschmitt Padilha</a>
         </td>
@@ -74,5 +77,11 @@ O processo de desenvolvimento do projeto foi tanto divertido quanto desafiador, 
         <td align="center">
         <a href="https://www.linkedin.com/in/leonardogomeskist/">Leonardo Gomes Kist</a>
         </td>
-
+        <td align="center">
+        <a href="https://www.linkedin.com/in/joao-carlos-0b721727a/">João Carlos</a>
+        </td>
+        <td align="center">
+        <a href="https://www.linkedin.com/in/yan-backaus-649822278/">Yan Backaus</a>
+        </td>
+    </tr>
         
