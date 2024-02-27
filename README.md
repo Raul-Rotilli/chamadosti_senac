@@ -1,4 +1,4 @@
-# Projeto de Sistema de chamados
+# Projeto de Sistema de Chamados
 
 ## Descrição
 
@@ -84,4 +84,7 @@ O processo de desenvolvimento do projeto foi tanto divertido quanto desafiador, 
         <a href="https://www.linkedin.com/in/yan-backaus-649822278/">Yan Backaus</a>
         </td>
     </tr>
+</table>
+
+Ao clicar no nome do colaborador, você será direcionado à página do LinkedIn do mesmo.
         
